@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Entities
 {
-    internal class QualityStandart
+    public class QualityStandart
     {
+        public int ID {  get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+
     }
 }

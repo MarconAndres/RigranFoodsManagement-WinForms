@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Entities
 {
-    internal class BusinessSector
+    public class BusinessSector
     {
+        public int ID { get; set; }
+        public string Description { get; set; }
     }
 }

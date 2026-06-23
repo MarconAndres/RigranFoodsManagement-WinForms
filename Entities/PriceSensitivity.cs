@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Entities
 {
-    internal class PriceSensitivity
+    public class PriceSensitivity
     {
+        public int ID { get; set; }
+        public string Level { get; set; }
     }
 }

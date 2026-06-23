@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Entities
 {
-    internal class PurchaseFrequency
+    public class PurchaseFrequency
     {
+        public int ID { get; set; }
+        public string Name { get; set; }
+
     }
 }
