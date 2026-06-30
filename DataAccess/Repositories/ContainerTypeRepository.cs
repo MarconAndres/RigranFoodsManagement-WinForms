@@ -7,7 +7,7 @@ using Entities;
 
 namespace DataAccess.Repositories
 {
-    public class ContainerTyperRepository
+    public class ContainerTypeRepository
     {
         private readonly Connection _connection = new Connection();
 
