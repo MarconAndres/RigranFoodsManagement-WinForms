@@ -47,4 +47,23 @@ namespace DataAccess.Repositories
                 }
             }
         }
-}   }
+
+        public void Update (CustomerContact contact)
+        {
+            string query = "UPDATE CustomerContact SET IdCustomer = @IdCustomer, FirstName = @FirstName, LastName = @LastName, [Role/Position] = @Role, Email = @Email, PhoneNumber = @PhoneNumber WHERE ID = @ID";
+
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    conn.Execute(query, contact);
+                }
+                catch (Exception ex)
+                {
+
+                    throw new Exception("Error: While Trying to Update Customer Contact. " + ex.Message);
+                }
+            }
+        }  
+    }
+}

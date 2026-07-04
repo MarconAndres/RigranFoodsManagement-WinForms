@@ -22,11 +22,34 @@ namespace Business
 
         public void Insert(CustomerContact customerContact)
         {
+            ValidateContact(customerContact);
+
+            _customerContactRepo.Insert(customerContact);
+        }
+
+        public void Update(CustomerContact customerContact)
+        {
+            
+            if (customerContact.ID <= 0)
+            {
+                throw new Exception("Error: The Customer Contact you are trying to modify does not have a valid ID.");
+            }
+
+            ValidateContact(customerContact);
+            _customerContactRepo.Update(customerContact);
+        }
+
+        private void ValidateContact (CustomerContact customerContact)
+        {
+            if (customerContact == null)
+            {
+                throw new Exception("Error: No data was provided.");
+            }
             if (customerContact.IdCustomer <= 0 || string.IsNullOrWhiteSpace(customerContact.FirstName) || string.IsNullOrWhiteSpace(customerContact.Email))
             {
-                throw new Exception("Error: Please complete the obligatorie fields. ");
+                throw new Exception("Error: Please complete the obligatory fields. ");
             }
-            if (customerContact.Email.Length >100)
+            if (customerContact.Email.Length > 100)
             {
                 throw new Exception("Error: Customer Contact Email can not possess more than 100 characters.");
             }
@@ -42,8 +65,6 @@ namespace Business
             {
                 throw new Exception("Error: Customer Contact Phone Number can not possess more than 50 characters. ");
             }
-
-            _customerContactRepo.Insert(customerContact);
         }
     }
 }

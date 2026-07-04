@@ -7,7 +7,7 @@ namespace Entities
     public class ProductSpecifications
     {
         public int ID { get; set; } 
-        public int IdProductMaster { get; set; }
+        public int? IdProductMaster { get; set; }
         public string Size { get; set; }
         public string Moisture { get; set; }
         public string SplitAndBroken { get; set; }

@@ -29,5 +29,20 @@ namespace DataAccess.Repositories
                 }
             }
         }
+        public void Insert(ProductType productType)
+        {
+            string query = "INSERT INTO ProductType ([Name]) VALUES (@Name)";
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    conn.Execute(query, productType);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error while trying to insert ProductType. " + ex.Message);
+                }
+            }
+        }
     }
 }
