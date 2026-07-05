@@ -22,9 +22,20 @@ namespace Business
 
         public void Insert(CustomerProductProfile customerProductProfile)
         {
+            ValidateCustomerProductProfile(customerProductProfile);
+
+            _customerProductProfileRepo.Insert(customerProductProfile);
+        }
+
+        private void ValidateCustomerProductProfile(CustomerProductProfile customerProductProfile)
+        {
+            if (customerProductProfile == null)
+            {
+                throw new Exception("Error: No data was provided.");
+            }
             if (customerProductProfile.IdCustomer <= 0 || customerProductProfile.IdProductMaster <= 0)
             {
-                throw new Exception("Error: Please complete the obligatorie fields. ");
+                throw new Exception("Error: Please complete the obligatory fields. ");
             }
 
             if (customerProductProfile.AnnualVolume.HasValue && customerProductProfile.AnnualVolume.Value < 0)
@@ -59,10 +70,20 @@ namespace Business
 
             if (customerProductProfile.IdQualityStandart.HasValue && customerProductProfile.IdQualityStandart.Value <= 0)
             {
-                throw new Exception("Error: The selected Quality Standard is not correect. ");
+                throw new Exception("Error: The selected Quality Standard is not correct. ");
             }
+        }
 
-            _customerProductProfileRepo.Insert(customerProductProfile);
+        public void Update(CustomerProductProfile customerProductProfile)
+        {
+            
+
+            if (customerProductProfile.IdCustomer <= 0 || customerProductProfile.IdProductMaster <= 0)
+            {
+                throw new Exception("Error: The Customer Product Profile you are trying to modify does not have a valid ID.");
+            }
+            ValidateCustomerProductProfile(customerProductProfile);
+            _customerProductProfileRepo.Update(customerProductProfile);
         }
     }
 }

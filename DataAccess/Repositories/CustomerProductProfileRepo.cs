@@ -47,5 +47,21 @@ namespace DataAccess.Repositories
                 }
             }
         }
+        public void Update(CustomerProductProfile customerProductProfile)
+        {
+            string query = "UPDATE CustomerProductProfile SET IdCustomer = @IdCustomer, IdProductMaster = @IdProductMaster, AnnualVolume = @AnnualVolume, IdPreferredPackaging = @IdPreferredPackaging, IdPurchaseFrequency = @IdPurchaseFrequency, IdPriceSensitivity = @IdPriceSensitivity, AlternativeOrigin = @AlternativeOrigin, IdQualityStandart = @IdQualityStandart, Notes = @Notes WHERE IdCustomer = @IdCustomer AND IdProductMaster = @IdProductMaster";
+            
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    conn.Execute(query, customerProductProfile);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error while trying to Update a CustomerProductProfile. " + ex.Message);
+                }
+            }
+        }
     }
 }
