@@ -19,9 +19,12 @@ namespace Business
         {
             return _portsRepo.GetAll();
         }
-
-        public void Insert(Ports port)
+        private void ValidatePort(Ports port)
         {
+            if (port == null)
+            {
+                throw new Exception("Error: No data was provided.");
+            }
             if (string.IsNullOrWhiteSpace(port.Name))
             {
                 throw new Exception("Error: Please complete the obligatory fields.");
@@ -35,8 +38,21 @@ namespace Business
             {
                 throw new Exception("Error: The selected Country is not correct. ");
             }
+
+        }
+        public void Insert(Ports port)
+        {
+            ValidatePort(port);
             _portsRepo.Insert(port);
         }
-
+        public void Update(Ports port)
+        {
+            ValidatePort(port);
+            if (port.ID <= 0)
+            {
+                throw new Exception("Error: The Port you are trying to modify does not have a valid ID.");
+            }
+            _portsRepo.Update(port);
+        }
     }
 }

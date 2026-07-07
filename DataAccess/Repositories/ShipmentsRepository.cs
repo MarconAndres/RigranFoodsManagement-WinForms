@@ -47,5 +47,20 @@ namespace DataAccess.Repositories
                 }
             }
         }
+        public void Update (Shipments shipments)
+        {
+            string query = "UPDATE Shipments SET IdSales = @IdSales, IdShipmentStatus = @IdShipmentStatus, BookingNumber = @BookingNumber, ContainerNumber = @ContainerNumber, IdContainerType = @IdContainerType, ShippingLine = @ShippingLine, IdPortOfLoading = @IdPortOfLoading, IdPortOfDestination = @IdPortOfDestination, ETD = @ETD, ATD = @ATD, ETA = @ETA, ATA = @ATA, FreeDays = @FreeDays, BLApproved = @BLApproved, DHLNumber = @DHLNumber, HasClaim = @HasClaim, ClaimNotes = @ClaimNotes, Notes = @Notes WHERE ID = @ID";
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    conn.Execute(query, shipments);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error while trying to update a Shipment. " + ex.Message);
+                }
+            }
+        }
     }
 }

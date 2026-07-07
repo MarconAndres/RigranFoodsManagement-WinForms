@@ -26,7 +26,16 @@ namespace Business
             ValidateShipments(shipments);
             _shipmentsRepository.Insert(shipments);
         }
-      
+        public void Update(Shipments shipments)
+        {
+            ValidateShipments(shipments);
+            if (shipments.ID <= 0)
+            {
+                throw new Exception("Error: The Shipment you are trying to modify does not have a valid ID.");
+            }
+            _shipmentsRepository.Update(shipments);
+        }
+
         private void ValidateShipments(Shipments shipments)
         {
             if (shipments == null)

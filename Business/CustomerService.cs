@@ -20,14 +20,29 @@ namespace Business
 
         public void Insert (Customer customer)
         {
+            ValidateCustomer(customer);
+            _customerRepo.Insert(customer);
+        }
+        public void Update (Customer customer)
+        {
+            ValidateCustomer(customer);
+            if (customer.ID <= 0)
+            {
+                throw new Exception("Error: The Customer you are trying to modify does not have a valid ID.");
+            }
+            _customerRepo.Update(customer);
+        }
+
+        private void ValidateCustomer(Customer customer)
+        {
+            if (customer == null)
+            {
+                throw new Exception("Error: No data was provided. ");
+            }
             if (string.IsNullOrWhiteSpace(customer.Name) || string.IsNullOrWhiteSpace(customer.Email) || customer.IdCountry <= 0 || string.IsNullOrWhiteSpace(customer.PhoneNumber))
             {
-                throw new Exception("Error: Please complete the obligatorie fields. ");
-            }
-            if (!customer.Active)
-            {
-                throw new Exception("Error: The Customer must be active. ");
-            }
+                throw new Exception("Error: Please complete the obligatory fields. ");
+            }            
             if (customer.Name.Length > 100)
             {
                 throw new Exception("Error: Customer Name can not possess more than 100 characters.");
@@ -54,13 +69,12 @@ namespace Business
             }
             if (customer.PhoneNumber.Length > 50)
             {
-                throw new Exception("Error: Customer Phone Number can not posses more tha 50 characters.");
+                throw new Exception("Error: Customer Phone Number can not posses more than 50 characters.");
             }
             if (customer.EORI != null && customer.EORI.Length > 50)
             {
                 throw new Exception("Error: Customer EORI can not possess more than 50 characters.");
             }
 
-            _customerRepo.Insert(customer);
         }
 }   }

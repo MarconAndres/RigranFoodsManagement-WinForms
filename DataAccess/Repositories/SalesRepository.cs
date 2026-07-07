@@ -47,5 +47,21 @@ namespace DataAccess.Repositories
                 }
             }
         }
-    }
-}
+        public void Update (Sales sales)
+        {
+            string query = "UPDATE Sales SET IdCustomer = @IdCustomer, IdProduct = @IdProduct, IdStatus = @IdStatus, ContractDate = @ContractDate, Shipper = @Shipper, Seller = @Seller, CropYear = @CropYear, Quantity = @Quantity, PricePerTon = @PricePerTon, IdCurrency = @IdCurrency, IdIncoTerm = @IdIncoTerm, IdMethodOfPayment = @IdMethodOfPayment, IdPortOfLoading = @IdPortOfLoading, IdPortOfDestination = @IdPortOfDestination, BrokerComissionPc = @BrokerComissionPc WHERE ID = @ID";
+
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    conn.Execute(query, sales);
+                }
+                catch (Exception ex)
+                {
+
+                    throw new Exception("Error while trying to Update a sale. " + ex.Message);
+                }
+            }
+        }
+}   }

@@ -22,7 +22,27 @@ namespace Business
 
         public void Insert(ProductMaster productMaster)
         {
-            if (!productMaster.IdProductType.HasValue ||  productMaster.IdProductType.Value <= 0)
+            ValidateProductMaster(productMaster);
+            _productMasterRepo.Insert(productMaster);
+        }
+
+        public void Update(ProductMaster productMaster)
+        {
+            if (productMaster.ID <= 0)
+            {
+                throw new Exception("Error: The Product Master you are trying to modify does not have a valid ID.");
+            }
+            ValidateProductMaster(productMaster);
+            _productMasterRepo.Update(productMaster);
+        }
+
+        private void ValidateProductMaster(ProductMaster productMaster)
+        {
+            if (productMaster == null)
+            {
+                throw new Exception("Error: No data was provided.");
+            }
+            if (!productMaster.IdProductType.HasValue || productMaster.IdProductType.Value <= 0)
             {
                 throw new Exception("Error: Please select a Product Type.");
             }
@@ -34,7 +54,5 @@ namespace Business
             {
                 throw new Exception("Error: The field Name can not possess more than 100 charaters.");
             }
-            _productMasterRepo.Insert(productMaster);
         }
-    }
-}
+}   }

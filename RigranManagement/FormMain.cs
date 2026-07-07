@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+
+namespace Winform
+{
+    public partial class FormMain : Form
+    {
+        public FormMain()
+        {
+            InitializeComponent();
+        }
+
+        private Form FormActive = null;
+
+        private void OpenFormInPanelContainer(Form formChild)
+        {
+            if (FormActive != null)
+            {
+                FormActive.Close();
+            }
+            FormActive = formChild;
+
+            formChild.TopLevel = false;
+            formChild.FormBorderStyle = FormBorderStyle.None;
+            formChild.Dock = DockStyle.Fill;
+            panelContainer.Controls.Add(formChild);
+            panelContainer.Tag = formChild;
+
+            formChild.BringToFront();
+            formChild.Show();
+        }
+        private void buttonShipments_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonPorts_Click(object sender, EventArgs e)
+        {
+            OpenFormInPanelContainer (new FormPorts());
+        }
+    }
+}

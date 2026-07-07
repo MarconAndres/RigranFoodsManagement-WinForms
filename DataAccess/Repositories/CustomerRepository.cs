@@ -48,5 +48,21 @@ namespace DataAccess.Repositories
                 }
             }
         }
-    }
-}
+
+        public void Update (Customer customer)
+        {
+            string query = "UPDATE Customer SET [Name] = @Name, IdBusinessSector = @IdBusinessSector, RegisteredName = @RegisteredName, [Address] = @Address, [E-mail] = @Email, VAT = @VAT, IdCountry = @IdCountry, PhoneNumber = @PhoneNumber, BIO = @BIO, EORI = @EORI, Active = @Active WHERE ID = @ID";
+
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    conn.Execute(query, customer);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception ("Error while trying to Update a Customer. " + ex.Message);
+                }
+            }
+        }
+}}

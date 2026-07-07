@@ -47,5 +47,20 @@ namespace DataAccess.Repositories
                 }
             }
         }
+        public void Update(Ports port)
+        {
+            string query = "UPDATE Ports SET [Name] = @Name, IdCountry = @IdCountry WHERE ID = @ID";
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    conn.Execute(query, port);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error while trying to Update a Port. " + ex.Message);
+                }
+            }
+        }
     }
 }

@@ -47,5 +47,20 @@ namespace DataAccess.Repositories
                 }
             }
         }
+        public void Update(ProductSpecifications productSpecifications)
+        {
+            string query = "UPDATE ProductSpecifications SET IdProductMaster = @IdProductMaster, [Size] = @Size, Moisture = @Moisture, SplitAndBroken = @SplitAndBroken, Foreignmatter = @Foreignmatter, TotalDamage = @TotalDamage, Purity = @Purity, AddSpecs = @AddSpecs WHERE ID = @ID";
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    conn.Execute(query, productSpecifications);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error while trying to Update a ProductSpecification. " + ex.Message);
+                }
+            }
+        }
     }
 }

@@ -18,8 +18,12 @@ namespace Business
         {
             return _salesRepo.GetAll();
         }
-        public void Insert(Sales sales)
+        private void ValidateSales(Sales sales)
         {
+            if (sales == null)
+            {
+                throw new Exception("Error: No data was provided.");
+            }
             if (!sales.IdCustomer.HasValue || !sales.IdProduct.HasValue || !sales.IdStatus.HasValue || !sales.ContractDate.HasValue || string.IsNullOrWhiteSpace(sales.CropYear) || !sales.Quantity.HasValue || !sales.PricePerTon.HasValue || !sales.IdCurrency.HasValue || !sales.IdIncoTerm.HasValue || !sales.IdMethodOfPayment.HasValue)
             {
                 throw new Exception("Error: Please complete the obligatory fields.");
@@ -77,7 +81,20 @@ namespace Business
                 throw new Exception("Error: The selected Port of Destination is not correct or it doesn't exist.");
             }
 
+        }
+        public void Insert(Sales sales)
+        {
+            ValidateSales(sales);
             _salesRepo.Insert(sales);
+        }
+        public void Update(Sales sales)
+        {
+            ValidateSales(sales);
+            if (sales.ID <= 0)
+            {
+                throw new Exception("Error: The Sale you are trying to modify does not have a valid ID.");
+            }
+            _salesRepo.Update(sales);
         }
     }
 }

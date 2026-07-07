@@ -47,5 +47,22 @@ namespace DataAccess.Repositories
                 }
             }
         }
+        public void Update (ProductMaster productMaster)
+        {
+            string query = "UPDATE ProductMaster SET IdProductType = @IdProductType, [Name] = @Name";
+
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    conn.Query<ProductMaster>(query);
+                }
+                catch (Exception ex)
+                {
+
+                    throw new Exception("Error while tryin to update ProductMaster" + ex.Message);
+                }
+            }
+        }
     }
 }
