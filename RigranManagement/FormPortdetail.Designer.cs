@@ -125,7 +125,7 @@
             Controls.Add(labelPortName);
             Controls.Add(labelPortDetail);
             Font = new Font("Segoe UI", 9F);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "FormPortdetail";
             Text = "FormPortdetail";
             Load += FormPortdetail_Load;

@@ -45,10 +45,9 @@
             // 
             // btnInsertFormPorts
             // 
-            btnInsertFormPorts.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnInsertFormPorts.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
             btnInsertFormPorts.Font = new Font("Segoe UI", 11F);
-            btnInsertFormPorts.Location = new Point(292, 331);
+            btnInsertFormPorts.Location = new Point(23, 94);
             btnInsertFormPorts.Name = "btnInsertFormPorts";
             btnInsertFormPorts.Size = new Size(75, 29);
             btnInsertFormPorts.TabIndex = 1;
@@ -58,10 +57,9 @@
             // 
             // btnUpdateFormPorts
             // 
-            btnUpdateFormPorts.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnUpdateFormPorts.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
             btnUpdateFormPorts.Font = new Font("Segoe UI", 11F);
-            btnUpdateFormPorts.Location = new Point(415, 331);
+            btnUpdateFormPorts.Location = new Point(119, 94);
             btnUpdateFormPorts.Name = "btnUpdateFormPorts";
             btnUpdateFormPorts.Size = new Size(75, 29);
             btnUpdateFormPorts.TabIndex = 2;

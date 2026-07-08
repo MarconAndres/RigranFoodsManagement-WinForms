@@ -24,6 +24,7 @@ namespace Winform
             _portsService = new PortsService();
             _countryService = new CountryService();
             _isEditMode = false;
+            _currentPort = new Ports();
         }
 
         public FormPortdetail(Ports porttoEdit) : this()
@@ -70,10 +71,12 @@ namespace Winform
             {
                 if (_isEditMode)
                 {
+                    _portsService.Update(_currentPort);
                     MessageBox.Show("Port Updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
+                    _portsService.Insert(_currentPort);
                     MessageBox.Show("Port Inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 

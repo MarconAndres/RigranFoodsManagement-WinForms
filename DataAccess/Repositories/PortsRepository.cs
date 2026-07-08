@@ -62,5 +62,22 @@ namespace DataAccess.Repositories
                 }
             }
         }
+
+        public Ports GetById (int id)
+        {
+            string query = "SELECT ID, [Name], IdCountry FROM [Ports] WHERE ID = @ID";
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    var result = conn.QuerySingleOrDefault<Ports>(query, new { ID = id });
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error while trying to read a Port by ID. " + ex.Message);
+                }
+            }
+        }
     }
 }

@@ -54,5 +54,23 @@ namespace Business
             }
             _portsRepo.Update(port);
         }
+
+        public Ports GetById(int id)
+        {
+            try
+            {
+                if (id <= 0)
+                {
+                    return null;
+                }
+
+                return _portsRepo.GetById(id);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error while trying to Get by ID" + ex.Message);
+            }
+        }
     }
 }
