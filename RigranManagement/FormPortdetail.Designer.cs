@@ -35,6 +35,8 @@
             cmbCountriesFormPortDetail = new ComboBox();
             btnSaveFormPortDetail = new Button();
             btnCancelFormPortDetail = new Button();
+            lblObligatoryfield = new Label();
+            label2 = new Label();
             SuspendLayout();
             // 
             // labelPortDetail
@@ -111,12 +113,36 @@
             btnCancelFormPortDetail.UseVisualStyleBackColor = true;
             btnCancelFormPortDetail.Click += btnCancelFormPortDetail_Click;
             // 
+            // lblObligatoryfield
+            // 
+            lblObligatoryfield.AutoSize = true;
+            lblObligatoryfield.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblObligatoryfield.ForeColor = Color.Red;
+            lblObligatoryfield.Location = new Point(496, 123);
+            lblObligatoryfield.Name = "lblObligatoryfield";
+            lblObligatoryfield.Size = new Size(15, 19);
+            lblObligatoryfield.TabIndex = 7;
+            lblObligatoryfield.Text = "*";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label2.ForeColor = Color.Red;
+            label2.Location = new Point(496, 171);
+            label2.Name = "label2";
+            label2.Size = new Size(15, 19);
+            label2.TabIndex = 8;
+            label2.Text = "*";
+            // 
             // FormPortdetail
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ActiveBorder;
+            BackColor = SystemColors.ButtonFace;
             ClientSize = new Size(800, 450);
+            Controls.Add(label2);
+            Controls.Add(lblObligatoryfield);
             Controls.Add(btnCancelFormPortDetail);
             Controls.Add(btnSaveFormPortDetail);
             Controls.Add(cmbCountriesFormPortDetail);
@@ -142,5 +168,7 @@
         private ComboBox cmbCountriesFormPortDetail;
         private Button btnSaveFormPortDetail;
         private Button btnCancelFormPortDetail;
+        private Label lblObligatoryfield;
+        private Label label2;
     }
 }

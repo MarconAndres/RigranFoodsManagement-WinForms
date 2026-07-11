@@ -41,7 +41,12 @@ namespace Winform
 
         private void buttonPorts_Click(object sender, EventArgs e)
         {
-            OpenFormInPanelContainer (new FormPorts());
+            OpenFormInPanelContainer(new FormPorts());
+        }
+
+        private void buttonCustomer_Click(object sender, EventArgs e)
+        {
+            OpenFormInPanelContainer(new FormCustomer());
         }
     }
 }

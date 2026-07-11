@@ -49,7 +49,7 @@ namespace Winform
             catch (Exception ex)
             {
 
-                MessageBox.Show($"Error loading ports: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error loading ports:" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
