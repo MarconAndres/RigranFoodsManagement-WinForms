@@ -94,7 +94,9 @@ namespace Winform
                 : (int)cmbCustomerBusinessSector.SelectedValue;
             _currentCustomer.RegisteredName = txtCustomerRegisteredName.Text.Trim();
             _currentCustomer.Address = txtCustomerAddress.Text.Trim();
-            _currentCustomer.IdCountry = (int)cmbCustomerCountry.SelectedValue;
+            _currentCustomer.IdCountry = cmbCustomerCountry.SelectedIndex == -1
+                ? 0
+                : (int)cmbCustomerCountry.SelectedValue;
             _currentCustomer.Email = txtCustomerEmail.Text.Trim();
             _currentCustomer.VAT = txtCustomerVAT.Text.Trim();
             _currentCustomer.EORI = txtCustomerEORI.Text.Trim();

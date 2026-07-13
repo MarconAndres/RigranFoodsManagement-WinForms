@@ -42,6 +42,7 @@
             dgvCustomer.Name = "dgvCustomer";
             dgvCustomer.Size = new Size(798, 175);
             dgvCustomer.TabIndex = 0;
+            dgvCustomer.CellContentClick += dgvCustomer_CellContentClick;
             // 
             // btnInsertCustomer
             // 

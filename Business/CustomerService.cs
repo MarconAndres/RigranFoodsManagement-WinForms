@@ -33,6 +33,22 @@ namespace Business
             _customerRepo.Update(customer);
         }
 
+        public Customer GetById(int id)
+        {
+            try
+            {
+                if (id <= 0)
+                {
+                    throw new Exception("Error: The Customer ID is not valid.");
+                }
+                return _customerRepo.GetById(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving customer by ID: " + ex.Message);
+            }
+        }
+
         private void ValidateCustomer(Customer customer)
         {
             if (customer == null)

@@ -37,25 +37,25 @@ namespace Winform
                 List<Country> countries = countryService.GetAll();
 
                 var customerListwithCountryandSector = from customer in customerList
-                    join sector in businessSectors on customer.IdBusinessSector equals sector.ID into sectorGroup
-                    from sector in sectorGroup.DefaultIfEmpty()
-                    join country in countries on customer.IdCountry equals country.ID into countryGroup
-                    from country in countryGroup.DefaultIfEmpty()
-                    select new
-                    {
-                        customer.ID,
-                        customer.Name,
-                        BusinessSector = sector?.Description ?? "N/A",
-                        customer.RegisteredName,
-                        customer.Address,
-                        customer.Email,
-                        customer.VAT,
-                        Country = country?.Name ?? "N/A",
-                        customer.PhoneNumber,
-                        customer.BIO,
-                        customer.EORI,
-                        Active = customer.Active ? "Yes" : "No"
-                    };
+                                                       join sector in businessSectors on customer.IdBusinessSector equals sector.ID into sectorGroup
+                                                       from sector in sectorGroup.DefaultIfEmpty()
+                                                       join country in countries on customer.IdCountry equals country.ID into countryGroup
+                                                       from country in countryGroup.DefaultIfEmpty()
+                                                       select new
+                                                       {
+                                                           customer.ID,
+                                                           customer.Name,
+                                                           BusinessSector = sector?.Description ?? "N/A",
+                                                           customer.RegisteredName,
+                                                           customer.Address,
+                                                           customer.Email,
+                                                           customer.VAT,
+                                                           Country = country?.Name ?? "N/A",
+                                                           customer.PhoneNumber,
+                                                           customer.BIO,
+                                                           customer.EORI,
+                                                           Active = customer.Active ? "Yes" : "No"
+                                                       };
 
 
 
@@ -94,14 +94,32 @@ namespace Winform
                 return;
             }
 
-            Customer selectedCustomer = (Customer)dgvCustomer.CurrentRow.DataBoundItem;
-            FormCustomerDetail frmDetail = new FormCustomerDetail(selectedCustomer);
 
-            if (frmDetail.ShowDialog() == DialogResult.OK)
+            try
             {
-                RefreshDgv();
+                int selectedID = (int)dgvCustomer.CurrentRow.Cells["ID"].Value;
+                Customer customerToEdit = _customerService.GetById(selectedID);
+
+                if (customerToEdit != null)
+                {
+                    FormCustomerDetail frmDetail = new FormCustomerDetail(customerToEdit);
+                    if (frmDetail.ShowDialog() == DialogResult.OK)
+                    {
+                        RefreshDgv();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
 
+
+        }
+
+        private void dgvCustomer_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }

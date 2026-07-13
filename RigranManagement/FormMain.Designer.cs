@@ -102,6 +102,7 @@
             buttonSales.TabIndex = 4;
             buttonSales.Text = "Sales";
             buttonSales.UseVisualStyleBackColor = false;
+            buttonSales.Click += buttonSales_Click;
             // 
             // labelCommercial
             // 

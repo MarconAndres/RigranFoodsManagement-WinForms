@@ -65,4 +65,25 @@ namespace DataAccess.Repositories
                 }
             }
         }
+
+        public Customer GetById(int id)
+        {
+            string query = "SELECT ID, [Name], IdBusinessSector, RegisteredName, [Address], [E-mail] as Email, VAT, IdCountry, PhoneNumber, BIO, EORI, Active FROM Customer WHERE ID = @ID";
+
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+
+                    var result = conn.QuerySingleOrDefault<Customer>(query, new { ID = id });
+                    return result;
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw new Exception("Error: while tryong to read a Customer by ID" + ex.Message);
+                }
+            }
+        }
 }}
