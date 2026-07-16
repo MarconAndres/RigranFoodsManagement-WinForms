@@ -21,7 +21,7 @@ namespace Entities
         public int? IdMethodOfPayment { get; set; }
         public int? IdPortOfLoading { get; set; }
         public int? IdPortOfDestination { get; set; }
-        public decimal BrokerComission { get; set; }
+        public decimal BrokerComissionPc { get; set; }
 
     }
 }

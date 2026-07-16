@@ -84,7 +84,7 @@ namespace Winform
                     txtCropYear.Text = _currentSale.CropYear;
                     txtQuantity.Text = _currentSale.Quantity.ToString();
                     txtPricePerTon.Text = _currentSale.PricePerTon.ToString();
-                    txtBrokerComission.Text = _currentSale.BrokerComission.ToString();
+                    txtBrokerComission.Text = _currentSale.BrokerComissionPc.ToString();
 
                     cmbCustomer.SelectedValue = _currentSale.IdCustomer;
                     cmbProduct.SelectedValue = _currentSale.IdProduct;
@@ -107,6 +107,70 @@ namespace Winform
             {
                 MessageBox.Show("Error loading sale details: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _currentSale.ContractDate = dateTimePicker1.Value;
+                _currentSale.Shipper = txtShipper.Text.Trim();
+                _currentSale.Seller = txtSeller.Text.Trim();
+                _currentSale.CropYear = txtCropYear.Text.Trim();
+                _currentSale.Quantity = decimal.Parse(txtQuantity.Text.Trim());
+                _currentSale.PricePerTon = decimal.Parse(txtPricePerTon.Text.Trim());
+                _currentSale.BrokerComissionPc = decimal.Parse(txtBrokerComission.Text.Trim());
+
+
+                _currentSale.IdCustomer = cmbCustomer.SelectedIndex == -1
+                    ? 0
+                    : (int)cmbCustomer.SelectedValue;
+                _currentSale.IdProduct = cmbProduct.SelectedIndex == -1
+                    ? 0
+                    : (int)cmbProduct.SelectedValue;
+                _currentSale.IdStatus = cmbStatus.SelectedIndex == -1
+                    ? 0
+                    : (int)cmbStatus.SelectedValue;
+                _currentSale.IdCurrency = cmbCurrency.SelectedIndex == -1
+                    ? 0
+                    : (int)cmbCurrency.SelectedValue;
+                _currentSale.IdIncoTerm = cmbIncoterm.SelectedIndex == -1
+                    ? 0
+                    : (int)cmbIncoterm.SelectedValue;
+                _currentSale.IdMethodOfPayment = cmbMethodOfPayment.SelectedIndex == -1
+                    ? 0
+                    : (int)cmbMethodOfPayment.SelectedValue;
+                _currentSale.IdPortOfLoading = cmbPortOfLoading.SelectedIndex == -1
+                    ? (int?)null
+                    : (int)cmbPortOfLoading.SelectedValue;
+                _currentSale.IdPortOfDestination = cmbPortOfDestination.SelectedIndex == -1
+                    ? (int?)null
+                    : (int)cmbPortOfDestination.SelectedValue;
+
+
+                if (_isEditMode)
+                {
+                    _salesService.Update(_currentSale);
+                    MessageBox.Show("Sale updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    _salesService.Insert(_currentSale);
+                    MessageBox.Show("Sale added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error saving sale: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

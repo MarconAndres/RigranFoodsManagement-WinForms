@@ -69,6 +69,31 @@ CONSTRAINT FK_ProductSpecifications_ProductMaster FOREIGN KEY (IdProductMaster) 
 );
 GO
 
+INSERT INTO ProductSpecifications 
+    (IdProductMaster, [Size], Moisture, SplitAndBroken, Foreignmatter, TotalDamage, Purity, AddSpecs)
+VALUES
+    -- 1. KABULI CHICKPEAS
+    (1, '7-8-9 mm', '14.0%', '1.0%', '0.5%', '4.0%', '99.0%', 'Export Quality - Undersize 10% max, Discolored 1% max, Cracked seed coat 1% max'),
+
+    -- 4. BLACK BEANS
+    (4, '3.5-4 mm', '14.0%', '1.0%', '0.5%', '5.0%', '99.0%', 'Export Quality - Undersize 10% max, Discolored 1% max, Cracked seed coat 2% max'),
+
+    -- 5. CRANBERRY BEANS
+    (5, '170-230/100g', '15.0%', '1.0%', '0.5%', '4.0%', '99.0%', 'Export Quality - Stained 2% max, Cracked seed coat 1% max'),
+
+    -- 6. DARK RED KIDNEY BEANS
+    (6, '170-210/100g', '15.0%', '1.0%', '0.5%', '4.0%', '99.0%', 'Export Quality - Stained 2% max, Cracked seed coat 1% max'),
+
+    -- 8. GREEN MUNG BEANS
+    (8, '3.25-4 mm', '14.0%', '1.0%', '0.5%', '7.0%', '99.0%', 'Export Quality - Undersize 10% max, Discolored 3% max, Wrinkled 2% max'),
+
+    -- 10. ALUBIA BEANS
+    (10, '180-200/100g', '15.0%', '1.0%', '0.5%', '4.0%', '99.0%', 'Export Quality - Stained 2% max, Cracked seed coat 1% max'),
+
+    -- 18. POPCORN 
+    (18, '55-67 (K10)', '14.5%', '1.0%', '0.5%', '1.5%', '99.5%', 'Butterfly Type - Export Quality');
+GO
+
 CREATE TABLE [Status](
 ID INT IDENTITY(1,1) NOT NULL,
 [Name] VARCHAR(30) NOT NULL,
@@ -418,7 +443,7 @@ BrokerComissionPc DECIMAL (3,2),
 CONSTRAINT PK_SaleS PRIMARY KEY (ID),
 CONSTRAINT FK_Sales_Customer FOREIGN KEY (IdCustomer) REFERENCES Customer (ID),
 CONSTRAINT FK_Sales_Status FOREIGN KEY (IdStatus) REFERENCES [Status] (ID),
-CONSTRAINT FK_Sales_Product FOREIGN KEY (IdProduct) REFERENCES ProductSpecifications (ID),
+CONSTRAINT FK_Sales_Product FOREIGN KEY (IdProduct) REFERENCES ProductMaster (ID),
 CONSTRAINT FK_Sales_Currency FOREIGN KEY (IdCurrency) REFERENCES Currency (ID),
 CONSTRAINT FK_Sales_IncoTerm FOREIGN KEY (IdIncoTerm) REFERENCES Incoterm (ID),
 CONSTRAINT FK_Sales_MOP FOREIGN KEY (IdMethodOfPayment) REFERENCES MethodOfPayment (ID),
@@ -426,6 +451,7 @@ CONSTRAINT FK_Sales_POL FOREIGN KEY (IdPortOfLoading) REFERENCES [Ports] (ID),
 CONSTRAINT FK_Sales_POD FOREIGN KEY (IdPortOfDestination) REFERENCES [Ports] (ID)
 );
 GO
+
 
 CREATE TABLE ShipmentStatus(
 ID INT IDENTITY(1,1) NOT NULL,

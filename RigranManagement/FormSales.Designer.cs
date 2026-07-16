@@ -53,6 +53,7 @@
             btnInsertFormSale.TabIndex = 1;
             btnInsertFormSale.Text = "Insert";
             btnInsertFormSale.UseVisualStyleBackColor = true;
+            btnInsertFormSale.Click += btnInsertFormSale_Click;
             // 
             // btnUpdateFormSale
             // 
@@ -64,6 +65,7 @@
             btnUpdateFormSale.TabIndex = 2;
             btnUpdateFormSale.Text = "Update";
             btnUpdateFormSale.UseVisualStyleBackColor = true;
+            btnUpdateFormSale.Click += btnUpdateFormSale_Click;
             // 
             // FormSales
             // 
