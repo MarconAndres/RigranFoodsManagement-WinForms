@@ -378,6 +378,7 @@
             Controls.Add(txtCustomerName);
             Controls.Add(lblCustomerName);
             Controls.Add(lblFormCustomerDetail);
+            MaximumSize = new Size(816, 633);
             Name = "FormCustomerDetail";
             Text = "FormCustomerDetail";
             Load += FormCustomerDetail_Load;

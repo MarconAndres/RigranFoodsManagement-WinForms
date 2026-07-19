@@ -119,7 +119,15 @@ namespace Winform
                 _currentSale.CropYear = txtCropYear.Text.Trim();
                 _currentSale.Quantity = decimal.Parse(txtQuantity.Text.Trim());
                 _currentSale.PricePerTon = decimal.Parse(txtPricePerTon.Text.Trim());
-                _currentSale.BrokerComissionPc = decimal.Parse(txtBrokerComission.Text.Trim());
+                if (string.IsNullOrWhiteSpace(txtBrokerComission.Text))
+                {
+                    _currentSale.BrokerComissionPc = null;
+                }
+                else
+                {
+                    _currentSale.BrokerComissionPc = decimal.Parse(txtBrokerComission.Text.Trim());
+                    
+                }
 
 
                 _currentSale.IdCustomer = cmbCustomer.SelectedIndex == -1
@@ -146,6 +154,7 @@ namespace Winform
                 _currentSale.IdPortOfDestination = cmbPortOfDestination.SelectedIndex == -1
                     ? (int?)null
                     : (int)cmbPortOfDestination.SelectedValue;
+
 
 
                 if (_isEditMode)

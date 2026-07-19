@@ -64,4 +64,24 @@ namespace DataAccess.Repositories
                 }
             }
         }
-}   }
+        public Sales GetById(int id)
+        {
+            string query = "SELECT ID, IdCustomer, IdProduct, IdStatus, ContractDate, Shipper, Seller, CropYear, Quantity, PricePerTon, IdCurrency, IdIncoTerm, IdMethodOfPayment, IdPortOfLoading, IdPortOfDestination, BrokerComissionPc FROM Sales WHERE ID = @ID";
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    var result = conn.QuerySingleOrDefault<Sales>(query, new { ID = id });
+                    if (result == null)
+                    {
+                        throw new Exception("Error: Sale not found.");
+                    }
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error while trying to retrieve sale by ID. " + ex.Message);
+                }
+            }
+        }
+    }   }

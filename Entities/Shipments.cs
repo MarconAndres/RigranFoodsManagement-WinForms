@@ -15,7 +15,7 @@ namespace Entities
         public string ShippingLine {  get; set; }
         public int? IdPortOfLoading { get; set; }
         public int? IdPortOfDestination { get; set; }
-        public DateTime ETD { get; set; }
+        public DateTime? ETD { get; set; }
         public DateTime? ATD { get; set; }
         public DateTime? ETA { get; set; }
         public DateTime? ATA { get; set; }

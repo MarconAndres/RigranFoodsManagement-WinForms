@@ -133,12 +133,21 @@ namespace Winform
             }
             try
             {
-                
+                int selectedID = (int)dgvFormSales.CurrentRow.Cells["ID"].Value;
+                Sales saletoEdit = _salesService.GetById(selectedID);
+                if (saletoEdit != null)
+                {
+                    FormSaleDetail frmDetail = new FormSaleDetail(saletoEdit);
+                    if (frmDetail.ShowDialog() == DialogResult.OK)
+                    {
+                        RefreshDgv();
+                    }
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show("Error opening edit window: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
             }
         }
     }

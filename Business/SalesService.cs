@@ -96,5 +96,22 @@ namespace Business
             }
             _salesRepo.Update(sales);
         }
+        public Sales GetById(int id)
+        {
+            try
+            {
+                if (id <= 0)
+                {
+                    throw new Exception("Error: The Sale ID is not valid.");
+                }
+                return _salesRepo.GetById(id);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception ("Error retrieving customer by ID:" + ex.Message);
+            }
+        }
     }
 }

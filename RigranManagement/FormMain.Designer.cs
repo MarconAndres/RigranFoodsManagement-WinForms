@@ -62,7 +62,7 @@
             // 
             // btnCustomerContact
             // 
-            btnCustomerContact.BackColor = SystemColors.ControlDark;
+            btnCustomerContact.BackColor = SystemColors.ControlLight;
             btnCustomerContact.Dock = DockStyle.Top;
             btnCustomerContact.FlatAppearance.MouseOverBackColor = Color.White;
             btnCustomerContact.Font = new Font("Segoe UI", 12F);
@@ -76,7 +76,7 @@
             // 
             // buttonCustomer
             // 
-            buttonCustomer.BackColor = SystemColors.ControlDark;
+            buttonCustomer.BackColor = SystemColors.ControlLight;
             buttonCustomer.Dock = DockStyle.Top;
             buttonCustomer.FlatAppearance.MouseOverBackColor = Color.White;
             buttonCustomer.Font = new Font("Segoe UI", 12F);
@@ -91,7 +91,7 @@
             // 
             // buttonSales
             // 
-            buttonSales.BackColor = SystemColors.ControlDark;
+            buttonSales.BackColor = SystemColors.ControlLight;
             buttonSales.Dock = DockStyle.Top;
             buttonSales.FlatAppearance.MouseOverBackColor = Color.White;
             buttonSales.Font = new Font("Segoe UI", 12F);
@@ -118,7 +118,7 @@
             // 
             // buttonPorts
             // 
-            buttonPorts.BackColor = SystemColors.ControlDark;
+            buttonPorts.BackColor = SystemColors.ControlLight;
             buttonPorts.Dock = DockStyle.Top;
             buttonPorts.FlatAppearance.MouseOverBackColor = Color.White;
             buttonPorts.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -133,9 +133,9 @@
             // 
             // buttonShipments
             // 
-            buttonShipments.BackColor = SystemColors.ControlDark;
+            buttonShipments.BackColor = SystemColors.ControlLight;
             buttonShipments.Dock = DockStyle.Top;
-            buttonShipments.FlatAppearance.MouseOverBackColor = Color.White;
+            buttonShipments.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
             buttonShipments.Font = new Font("Segoe UI", 12F);
             buttonShipments.ForeColor = SystemColors.ActiveCaptionText;
             buttonShipments.Location = new Point(0, 21);

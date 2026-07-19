@@ -152,6 +152,7 @@
             Controls.Add(labelPortDetail);
             Font = new Font("Segoe UI", 9F);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximumSize = new Size(816, 489);
             Name = "FormPortdetail";
             Text = "FormPortdetail";
             Load += FormPortdetail_Load;

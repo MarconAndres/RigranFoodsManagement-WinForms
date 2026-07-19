@@ -1,8 +1,8 @@
   Rigran Foods - Enterprise Management System
 
-A robust, enterprise-grade management system (CRM & Logistics) custom-built for Rigran Foods to streamline international commodity sales, multi-currency contract execution, global ports logistics, and end-to-end shipment tracking.
+A enterprise-grade management system (CRM & Logistics) custom-built for Rigran Foods to streamline international commodity sales, multi-currency contract execution, global ports logistics, and end-to-end shipment tracking.
 
-This desktop application replaces scattered spreadsheets with a centralized, high-performance database, specifically tailored to handle complex agricultural export workflows (such as tracking international containers of mung beans).
+This desktop application replaces scattered spreadsheets with a centralized database, specifically tailored to handle agricultural export workflows.
 
 
   Key Features
@@ -15,12 +15,12 @@ This desktop application replaces scattered spreadsheets with a centralized, hig
 
   Architecture & Tech Stack
 
-The system follows a clean, decoupled Multi-Layered Architecture to ensure high maintainability, separation of concerns, and ease of migration to web environments (such as ASP.NET Core) in the future.
+The system follows a Multi-Layered Architecture to ensure maintainability, separation of concerns, and ease of migration to web environments (ASP.NET Core) in the future.
 
-* Presentation Layer: .NET Windows Forms (WinForms) featuring dynamic data binding, regionalized user input validation, and real-time UI formatting.
-* Business Logic Layer (BLL): Service-oriented architecture handling enterprise rules, custom validations, and business logic mapping.
-* Data Access Layer (DAL): High-performance repository pattern utilizing Dapper ORM for lightweight, fast raw SQL queries.
-* Database: SQL Server (SSMS) with a fully normalized relational schema, handling foreign keys, multi-currency constraints, and optimized data integrity.
+* Presentation Layer: .NET Windows Forms (WinForms) featuring dynamic data binding, regionalized user input validation.
+* Business Logic Layer (BLL): Service-oriented architecture handling enterprise rules, validations, and business logic mapping.
+* Data Access Layer (DAL): Repository pattern utilizing Dapper.
+* Database: SQL Server (SSMS) with a normalized relational schema, handling foreign  and primary keys.
 
 
   Tech Stack & Tools
@@ -36,7 +36,7 @@ The system follows a clean, decoupled Multi-Layered Architecture to ensure high 
 
 Web Migration: Transition the Presentation Layer to an ASP.NET Core Web API to expose endpoints to modern web frontends or mobile devices.
 
-Smart Analytics: Implementation of automated customer "temperature" logic based on historical purchase frequency.
+Smart Analytics: Implementation of customer "temperature" logic based on historical purchase frequency.
 
 Advanced CRM Features: Customer Product Profiles to auto-suggest custom commodity offers based on historic cargo patterns.
 

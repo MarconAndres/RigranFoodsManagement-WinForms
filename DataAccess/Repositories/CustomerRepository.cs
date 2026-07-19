@@ -82,7 +82,7 @@ namespace DataAccess.Repositories
                 catch (Exception ex)
                 {
 
-                    throw new Exception("Error: while tryong to read a Customer by ID" + ex.Message);
+                    throw new Exception("Error: while trying to read a Customer by ID" + ex.Message);
                 }
             }
         }

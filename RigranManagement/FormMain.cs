@@ -36,7 +36,7 @@ namespace Winform
         }
         private void buttonShipments_Click(object sender, EventArgs e)
         {
-
+            OpenFormInPanelContainer(new FormShipments());
         }
 
         private void buttonPorts_Click(object sender, EventArgs e)
