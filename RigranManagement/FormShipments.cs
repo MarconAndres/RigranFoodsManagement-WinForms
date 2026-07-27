@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Business;
+using Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Business;
-using Entities;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Winform
 {
@@ -23,8 +24,56 @@ namespace Winform
             try
             {
                 List<Shipments> shipmentList = _shipmentService.GetAll();
+                ShipmentStatusService _shipmentStatusService = new ShipmentStatusService();
+                List<ShipmentStatus> shipmentStatuses = _shipmentStatusService.GetAll();
+                ContainerTypeService _containerTypeService = new ContainerTypeService();
+                List<ContainerType> containerTypes = _containerTypeService.GetAll();
+                PortsService _portsService = new PortsService();
+                List<Ports> portsList = _portsService.GetAll();
+
+                var displaylist = from shipments in shipmentList
+
+                                  join stat in shipmentStatuses on shipments.IdShipmentStatus equals stat.ID into statGroup
+                                  from shipmentStatus in statGroup.DefaultIfEmpty()
+
+                                      
+                                  join ct in containerTypes on shipments.IdContainerType equals ct.ID into ctGroup
+                                  from containerType in ctGroup.DefaultIfEmpty()
+
+                                      
+                                  join portL in portsList on shipments.IdPortOfLoading equals portL.ID into portLGroup
+                                  from portOfLoading in portLGroup.DefaultIfEmpty()
+
+                                      
+                                  join portD in portsList on shipments.IdPortOfDestination equals portD.ID into portDGroup
+                                  from portOfDestination in portDGroup.DefaultIfEmpty()
+
+                                  select new
+                                  {
+                                      ID = shipments.ID,
+                                      Sales = shipments.IdSales,
+                                      ShipmentStatus = shipmentStatus != null ? shipmentStatus.Name : "N/A",
+                                      BookingNumber = shipments.BookingNumber,
+                                      ContainerNumber = shipments.ContainerNumber,
+                                      ContainerType = containerType != null ? containerType.Code : "N/A",
+                                      ShippingLine = shipments.ShippingLine,
+                                      PortOfLoading = portOfLoading != null ? portOfLoading.Name : "N/A",
+                                      PortOfDestination = portOfDestination != null ? portOfDestination.Name : "N/A",
+                                      ETD = shipments.ETD,
+                                      ATD = shipments.ATD,
+                                      ETA = shipments.ETA,
+                                      ATA = shipments.ATA,
+                                      FreeDays = shipments.FreeDays,
+                                      BLApproved = shipments.BLApproved ? "Yes" : "No",
+                                      DHLNumber = shipments.DHLNumber,
+                                      HasClaim = shipments.HasClaim ? "Yes" : "No",
+                                      ClaimNote = shipments.ClaimNotes,
+                                      Notes = shipments.Notes
+                                  };
+
+
                 dgvShipments.DataSource = null;
-                dgvShipments.DataSource = shipmentList;
+                dgvShipments.DataSource = displaylist.ToList();
             }
             catch (Exception ex)
             {

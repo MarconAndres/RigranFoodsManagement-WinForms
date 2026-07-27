@@ -40,8 +40,8 @@ namespace Winform
                 cmbIdSale.DisplayMember = "ID";
                 cmbIdSale.ValueMember = "ID";
 
-                var _statusService = new StatusService();
-                cmbStatus.DataSource = _statusService.GetAll();
+                var _shipmentStatusService = new ShipmentStatusService();
+                cmbStatus.DataSource = _shipmentStatusService.GetAll();
                 cmbStatus.DisplayMember = "Name";
                 cmbStatus.ValueMember = "ID";
 
@@ -155,6 +155,9 @@ namespace Winform
                     _shipmentsService.Insert(_currentShipment);
                     MessageBox.Show("Shipment added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
 
             }
             catch (Exception ex)
