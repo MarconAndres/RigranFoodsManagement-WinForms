@@ -31,6 +31,8 @@
             dgvCustomer = new DataGridView();
             btnInsertCustomer = new Button();
             btnUpdateCustomer = new Button();
+            label1 = new Label();
+            txtSearch = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvCustomer).BeginInit();
             SuspendLayout();
             // 
@@ -68,12 +70,32 @@
             btnUpdateCustomer.UseVisualStyleBackColor = true;
             btnUpdateCustomer.Click += btnUpdateCustomer_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(30, 34);
+            label1.Name = "label1";
+            label1.Size = new Size(60, 21);
+            label1.TabIndex = 3;
+            label1.Text = "Search:";
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(86, 32);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(194, 23);
+            txtSearch.TabIndex = 4;
+            txtSearch.TextChanged += txtSearch_TextChanged;
+            // 
             // FormCustomer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(800, 450);
+            Controls.Add(txtSearch);
+            Controls.Add(label1);
             Controls.Add(btnUpdateCustomer);
             Controls.Add(btnInsertCustomer);
             Controls.Add(dgvCustomer);
@@ -83,6 +105,7 @@
             Load += FormCustomer_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCustomer).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -90,5 +113,7 @@
         private DataGridView dgvCustomer;
         private Button btnInsertCustomer;
         private Button btnUpdateCustomer;
+        private Label label1;
+        private TextBox txtSearch;
     }
 }

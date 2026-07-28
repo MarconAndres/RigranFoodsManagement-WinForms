@@ -36,15 +36,15 @@ namespace Winform
                                   join stat in shipmentStatuses on shipments.IdShipmentStatus equals stat.ID into statGroup
                                   from shipmentStatus in statGroup.DefaultIfEmpty()
 
-                                      
+
                                   join ct in containerTypes on shipments.IdContainerType equals ct.ID into ctGroup
                                   from containerType in ctGroup.DefaultIfEmpty()
 
-                                      
+
                                   join portL in portsList on shipments.IdPortOfLoading equals portL.ID into portLGroup
                                   from portOfLoading in portLGroup.DefaultIfEmpty()
 
-                                      
+
                                   join portD in portsList on shipments.IdPortOfDestination equals portD.ID into portDGroup
                                   from portOfDestination in portDGroup.DefaultIfEmpty()
 
@@ -102,6 +102,34 @@ namespace Winform
             if (formShipmentsDetail.ShowDialog() == DialogResult.OK)
             {
                 refreshDgv();
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (dgvShipments.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a Shipment to update", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            try
+            {
+                int slectedID = (int)dgvShipments.CurrentRow.Cells["ID"].Value;
+                Shipments shipmentToEdit = _shipmentService.GetById(slectedID);
+
+                if (shipmentToEdit != null)
+                {
+                    FormShipmentsDetail frmDetail = new FormShipmentsDetail(shipmentToEdit);
+                    if (frmDetail.ShowDialog() == DialogResult.OK)
+                    {
+                        refreshDgv();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error updating shipment:" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
             }
         }
     }

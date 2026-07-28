@@ -65,6 +65,7 @@
             btnUpdate.TabIndex = 2;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // FormShipments
             // 

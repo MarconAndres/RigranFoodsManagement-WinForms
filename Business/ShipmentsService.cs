@@ -36,6 +36,22 @@ namespace Business
             _shipmentsRepository.Update(shipments);
         }
 
+        public Shipments GetById(int id)
+        {
+            try
+            {
+                if (id <= 0)
+                {
+                    throw new Exception("Error: The Shipment ID is not valid.");
+                }
+                return _shipmentsRepository.GetById(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving shipment by ID: " + ex.Message);
+            }
+        }
+
         private void ValidateShipments(Shipments shipments)
         {
             if (shipments == null)

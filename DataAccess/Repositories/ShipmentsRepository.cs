@@ -62,5 +62,22 @@ namespace DataAccess.Repositories
                 }
             }
         }
+
+        public Shipments GetById(int id)
+        {
+            string query = "SELECT ID, IdSales, IdShipmentStatus, BookingNumber, ContainerNumber, IdContainerType, ShippingLine, IdPortOfLoading, IdPortOfDestination, ETD, ATD, ETA, ATA, FreeDays, BLApproved, DHLNumber, HasClaim, ClaimNotes, Notes FROM Shipments WHERE ID = @ID";
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    var result = conn.QuerySingleOrDefault<Shipments>(query, new { ID = id });
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error while trying to retrieve Shipment by ID. " + ex.Message);
+                }
+            }
+        }
     }
 }

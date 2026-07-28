@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Business;
@@ -14,16 +15,19 @@ namespace Winform
     {
         private readonly CustomerService _customerService;
 
+        private List<dynamic> _allCustomers;
+
         public FormCustomer()
         {
             InitializeComponent();
             _customerService = new CustomerService();
+            _allCustomers = new List<dynamic>(); 
         }
 
         private void FormCustomer_Load(object sender, EventArgs e)
         {
-            FormatDgv();
             RefreshDgv();
+            FormatDgv();
         }
 
         private void RefreshDgv()
@@ -31,6 +35,7 @@ namespace Winform
             try
             {
                 List<Customer> customerList = _customerService.GetAll();
+                
                 SectorBusinessService sectorBusinessService = new SectorBusinessService();
                 List<BusinessSector> businessSectors = sectorBusinessService.GetAll();
                 CountryService countryService = new CountryService();
@@ -57,10 +62,15 @@ namespace Winform
                                                            Active = customer.Active ? "Yes" : "No"
                                                        };
 
-
-
                 dgvCustomer.DataSource = null;
-                dgvCustomer.DataSource = customerListwithCountryandSector.ToList();
+
+                // materialize for the grid
+                var customerViewList = customerListwithCountryandSector.ToList();
+
+                // convert to List<dynamic> for filtering/searching
+                _allCustomers = customerViewList.Select(x => (dynamic)x).ToList();
+
+                dgvCustomer.DataSource = customerViewList;
             }
             catch (Exception ex)
             {
@@ -112,7 +122,7 @@ namespace Winform
             catch (Exception ex)
             {
 
-                MessageBox.Show("Error opening edit window: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+                MessageBox.Show("Error updating customer: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
             }
 
 
@@ -121,6 +131,30 @@ namespace Winform
         private void dgvCustomer_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (_allCustomers == null) return;
+
+            string filterText = txtSearch.Text.Trim().ToLower();
+
+            if (string.IsNullOrWhiteSpace(filterText))
+            {
+                dgvCustomer.DataSource = _allCustomers;
+            }
+            else
+            {
+                var filteredList = _allCustomers.Where(c =>
+                    (c.Name != null && c.Name.ToLower().Contains(filterText)) ||
+                    (c.BusinessSector != null && c.BusinessSector.ToLower().Contains(filterText)) ||
+                    (c.RegisteredName != null && c.RegisteredName.ToLower().Contains(filterText)) ||
+                    (c.Email != null && c.Email.ToLower().Contains(filterText)) ||
+                    (c.Country != null && c.Country.ToLower().Contains(filterText))
+                    ).ToList();
+
+                dgvCustomer.DataSource = filteredList;
+            }
         }
     }
 }
