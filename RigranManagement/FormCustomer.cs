@@ -80,6 +80,9 @@ namespace Winform
 
         private void FormatDgv()
         {
+            dgvCustomer.Columns["BusinessSector"].HeaderText = "Business Sector";
+            dgvCustomer.Columns["RegisteredName"].HeaderText = "Registered Name";
+            dgvCustomer.Columns["PhoneNumber"].HeaderText = "Phone Number";
             dgvCustomer.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCustomer.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCustomer.MultiSelect = false;

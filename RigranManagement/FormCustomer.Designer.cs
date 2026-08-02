@@ -82,7 +82,7 @@
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(86, 32);
+            txtSearch.Location = new Point(96, 32);
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(194, 23);
             txtSearch.TabIndex = 4;

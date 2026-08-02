@@ -31,6 +31,7 @@ namespace Winform
 
         private void FormCustomerDetail_Load(object sender, EventArgs e)
         {
+            
             try
             {
                 var _businessSectorService = new SectorBusinessService();

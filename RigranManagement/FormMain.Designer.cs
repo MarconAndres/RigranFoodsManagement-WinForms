@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panelLeft = new Panel();
+            btnCPP = new Button();
             btnCustomerContact = new Button();
             buttonCustomer = new Button();
             buttonSales = new Button();
@@ -45,6 +46,7 @@
             // 
             panelLeft.BackColor = SystemColors.ControlDark;
             panelLeft.BorderStyle = BorderStyle.FixedSingle;
+            panelLeft.Controls.Add(btnCPP);
             panelLeft.Controls.Add(btnCustomerContact);
             panelLeft.Controls.Add(buttonCustomer);
             panelLeft.Controls.Add(buttonSales);
@@ -59,6 +61,21 @@
             panelLeft.Name = "panelLeft";
             panelLeft.Size = new Size(196, 510);
             panelLeft.TabIndex = 0;
+            // 
+            // btnCPP
+            // 
+            btnCPP.BackColor = SystemColors.ControlLight;
+            btnCPP.Dock = DockStyle.Top;
+            btnCPP.FlatAppearance.MouseOverBackColor = Color.White;
+            btnCPP.Font = new Font("Segoe UI", 12F);
+            btnCPP.Location = new Point(0, 237);
+            btnCPP.Margin = new Padding(4, 3, 4, 3);
+            btnCPP.Name = "btnCPP";
+            btnCPP.Size = new Size(194, 39);
+            btnCPP.TabIndex = 7;
+            btnCPP.Text = "Customer Product Profile";
+            btnCPP.UseVisualStyleBackColor = false;
+            btnCPP.Click += btnCPP_Click;
             // 
             // btnCustomerContact
             // 
@@ -211,5 +228,6 @@
         private Label labelCommercial;
         private Button buttonCustomer;
         private Button btnCustomerContact;
+        private Button btnCPP;
     }
 }

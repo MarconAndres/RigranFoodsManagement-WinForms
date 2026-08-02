@@ -63,5 +63,22 @@ namespace DataAccess.Repositories
                 }
             }
         }
+
+        public CustomerProductProfile GetById(int idCustomer, int idProductMaster)
+        {
+            string query = "SELECT IdCustomer, IdProductMaster, AnnualVolume, IdPreferredPackaging, IdPurchaseFrequency, IdPriceSensitivity, AlternativeOrigin, IdQualityStandart, Notes FROM CustomerProductProfile WHERE IdCustomer = @IdCustomer AND IdProductMaster = @IdProductMaster";
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    var result = conn.QuerySingleOrDefault<CustomerProductProfile>(query, new { IdCustomer = idCustomer, IdProductMaster = idProductMaster });
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error while trying to read CustomerProductProfile by ID. " + ex.Message);
+                }
+            }
+        }
     }
 }

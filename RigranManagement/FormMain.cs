@@ -53,5 +53,10 @@ namespace Winform
         {
             OpenFormInPanelContainer(new FormSales());
         }
+
+        private void btnCPP_Click(object sender, EventArgs e)
+        {
+            OpenFormInPanelContainer(new FormCustomerProductProfile());
+        }
     }
 }

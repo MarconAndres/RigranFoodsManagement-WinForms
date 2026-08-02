@@ -85,5 +85,23 @@ namespace Business
             ValidateCustomerProductProfile(customerProductProfile);
             _customerProductProfileRepo.Update(customerProductProfile);
         }
+
+        public CustomerProductProfile GetById(int idCustomer, int idProductMaster)
+        {
+            try
+            {
+                if (idCustomer <= 0 || idProductMaster <= 0)
+                {
+                    throw new Exception("Error: The provided Customer ID or Product Master ID is not valid.");
+                }
+                return _customerProductProfileRepo.GetById(idCustomer, idProductMaster);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error retrieving customer by ID: " + ex.Message);
+            }
+        }
     }
 }
