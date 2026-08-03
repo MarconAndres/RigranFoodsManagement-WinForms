@@ -6,7 +6,7 @@ namespace Entities
 {
     public class CustomerProductProfile
     {
-        public int ID { get; set; }
+        //public int ID { get; set; }
         public int IdCustomer { get; set; }
         public int IdProductMaster { get; set; }
         public decimal? AnnualVolume { get; set; }

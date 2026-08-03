@@ -25,7 +25,7 @@ namespace Winform
         }
         public FormCPPDetail(CustomerProductProfile customerProductProfileToEdit) : this()
         {
-            InitializeComponent();
+            //InitializeComponent();
             _CurrentCustomerProductProfile = customerProductProfileToEdit;
             _isEditMode = true;
         }
@@ -64,7 +64,7 @@ namespace Winform
                 cmbQualityStandard.DisplayMember = "Name";
                 cmbQualityStandard.ValueMember = "ID";
 
-                if (_isEditMode && _customerProductProfileService != null)
+                if (_isEditMode && _CurrentCustomerProductProfile != null)
                 {
                     this.Text = "Edit Customer Product Profile";
 
@@ -91,6 +91,68 @@ namespace Winform
 
                 MessageBox.Show("Error initializing the form: " + Ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _CurrentCustomerProductProfile.IdCustomer = cmbCustomer.SelectedIndex == -1
+                ? 0
+                : (int)cmbCustomer.SelectedValue;
+                _CurrentCustomerProductProfile.IdProductMaster = cmbProduct.SelectedIndex == -1
+                    ? 0
+                    : (int)cmbProduct.SelectedValue;
+                _CurrentCustomerProductProfile.IdPreferredPackaging = cmbPreferredPackaging.SelectedIndex == -1
+                    ? 0
+                    : (int)cmbPreferredPackaging.SelectedValue;
+                _CurrentCustomerProductProfile.IdPurchaseFrequency = cmbPurchaseFrequency.SelectedIndex == -1
+                    ? 0
+                    : (int)cmbPurchaseFrequency.SelectedValue;
+                _CurrentCustomerProductProfile.IdPriceSensitivity = cmbPriceSensitivity.SelectedIndex == -1
+                    ? 0
+                    : (int)cmbPriceSensitivity.SelectedValue;
+                _CurrentCustomerProductProfile.IdQualityStandart = cmbQualityStandard.SelectedIndex == -1
+                    ? 0
+                    : (int)cmbQualityStandard.SelectedValue;
+
+                _CurrentCustomerProductProfile.AlternativeOrigin = txtAlternativeOrigin.Text.Trim();
+                _CurrentCustomerProductProfile.Notes = txtNotes.Text.Trim();
+
+                if (string.IsNullOrWhiteSpace(txtAnnualVolume.Text))
+                {
+                    _CurrentCustomerProductProfile.AnnualVolume = null;
+                }
+                else
+                {
+                    _CurrentCustomerProductProfile.AnnualVolume = decimal.Parse(txtAnnualVolume.Text.Trim());
+                }
+
+                if (_isEditMode)
+                {
+                    _customerProductProfileService.Update(_CurrentCustomerProductProfile);
+                    MessageBox.Show("Customer Product Profile updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    _customerProductProfileService.Insert(_CurrentCustomerProductProfile);
+                    MessageBox.Show("Customer Product Profile added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error saving the form: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

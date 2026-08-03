@@ -57,7 +57,8 @@ namespace Winform
                                                                        from qualityStandard in qualityStandardGroup.DefaultIfEmpty()
                                                                        select new
                                                                        {
-                                                                           profile.ID,
+                                                                           IdCustomer = profile.IdCustomer,
+                                                                           IdProductMaster = profile.IdProductMaster,                                                                          
                                                                            CustomerName = customer?.Name ?? "N/A",
                                                                            ProductName = product?.Name ?? "N/A",
                                                                            profile.AnnualVolume,
@@ -73,6 +74,7 @@ namespace Winform
                 var CPPviewlist = customerProductProfileListWithCustomerAndProduct.ToList();
                 _allCustomerProductProfiles = CPPviewlist.Select(x => (dynamic)x).ToList();
                 dgvCustomerProductProfile.DataSource = CPPviewlist;
+                FormatDgv();
             }
             catch (Exception ex)
             {
@@ -82,7 +84,8 @@ namespace Winform
 
         private void FormatDgv()
         {
-            dgvCustomerProductProfile.Columns["ID"].Visible = false;
+            dgvCustomerProductProfile.Columns["IdCustomer"].Visible = false;
+            dgvCustomerProductProfile.Columns["IdProductMaster"].Visible = false;
             dgvCustomerProductProfile.Columns["CustomerName"].HeaderText = "Customer";
             dgvCustomerProductProfile.Columns["ProductName"].HeaderText = "Product";
             dgvCustomerProductProfile.Columns["AnnualVolume"].HeaderText = "Annual Volume";
@@ -92,16 +95,11 @@ namespace Winform
             dgvCustomerProductProfile.Columns["AlternativeOrigin"].HeaderText = "Alternative Origin";
             dgvCustomerProductProfile.Columns["QualityStandard"].HeaderText = "Quality Standard";
             dgvCustomerProductProfile.Columns["Notes"].HeaderText = "Notes";
-            foreach (DataGridViewColumn column in dgvCustomerProductProfile.Columns)
-            {
-                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                int colWidth = column.Width;
-                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                column.Width = colWidth;
-                dgvCustomerProductProfile.MultiSelect = false;
-                dgvCustomerProductProfile.ReadOnly = true;
-                dgvCustomerProductProfile.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            }
+            
+            dgvCustomerProductProfile.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvCustomerProductProfile.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvCustomerProductProfile.MultiSelect = false;
+            dgvCustomerProductProfile.ReadOnly = true;
         }
 
         private void FormCustomerProductProfile_Load(object sender, EventArgs e)

@@ -102,6 +102,13 @@ namespace Winform
 
         private void FormatDgv()
         {
+            dgvFormSales.Columns["ContractDate"].HeaderText = "Contract Date";
+            dgvFormSales.Columns["CropYear"].HeaderText = "Crop Year";
+            dgvFormSales.Columns["PricePerTon"].HeaderText = "Price Per Ton";
+            dgvFormSales.Columns["MethodOfPayment"].HeaderText = "Method of Payment";
+            dgvFormSales.Columns["PortOfLoading"].HeaderText = "Port of Loading";
+            dgvFormSales.Columns["PortOfDestination"].HeaderText = "Port of Destination";
+            dgvFormSales.Columns["BrokerCommission"].HeaderText = "Broker Comission";
             dgvFormSales.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvFormSales.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvFormSales.MultiSelect = false;
@@ -110,8 +117,8 @@ namespace Winform
 
         private void FormSales_Load_1(object sender, EventArgs e)
         {
-            FormatDgv();
             RefreshDgv();
+            FormatDgv();
         }
 
         private void btnInsertFormSale_Click(object sender, EventArgs e)
