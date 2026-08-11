@@ -13,7 +13,7 @@ namespace DataAccess.Repositories
 
         public List<CustomerContact> GetAll()
         {
-            string query = "SELECT ID, IdCustomer, FirstName, LastName, [Role/Position] AS Role, Email, PhoneNumber FROM CustomerContact";
+            string query = "SELECT ID, IdCustomer, FirstName, LastName, [Role/Position] AS RolePosition, Email, PhoneNumber FROM CustomerContact";
 
             using (SqlConnection conn = _connection.GetConnection())
             {
@@ -32,7 +32,7 @@ namespace DataAccess.Repositories
 
         public void Insert (CustomerContact contact)
         {
-            string query = "INSERT INTO CustomerContact (IdCustomer, FirstName, LastName, [Role/Position], Email, PhoneNumber) VALUES (@IdCustomer, @FirstName, @LastName, @Role, @Email, @PhoneNumber)";
+            string query = "INSERT INTO CustomerContact (IdCustomer, FirstName, LastName, [Role/Position], Email, PhoneNumber) VALUES (@IdCustomer, @FirstName, @LastName, @RolePosition, @Email, @PhoneNumber)";
 
             using (SqlConnection conn = _connection.GetConnection())
             {
@@ -50,7 +50,7 @@ namespace DataAccess.Repositories
 
         public void Update (CustomerContact contact)
         {
-            string query = "UPDATE CustomerContact SET IdCustomer = @IdCustomer, FirstName = @FirstName, LastName = @LastName, [Role/Position] = @Role, Email = @Email, PhoneNumber = @PhoneNumber WHERE ID = @ID";
+            string query = "UPDATE CustomerContact SET IdCustomer = @IdCustomer, FirstName = @FirstName, LastName = @LastName, [Role/Position] = @RolePosition, Email = @Email, PhoneNumber = @PhoneNumber WHERE ID = @ID";
 
             using (SqlConnection conn = _connection.GetConnection())
             {
@@ -65,5 +65,24 @@ namespace DataAccess.Repositories
                 }
             }
         }  
+
+        public CustomerContact GetById(int id)
+        {
+            string query = "SELECT ID, IdCustomer, FirstName, LastName, [Role/Position] AS RolePosition, Email, PhoneNumber FROM CustomerContact WHERE ID = @ID";
+
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    var result = conn.QuerySingleOrDefault<CustomerContact>(query, new { ID = id });
+                    return result;
+                }
+                catch (Exception ex)
+                {
+
+                    throw new Exception("Error: While Trying to Retrieve Customer Contact. " + ex.Message);
+                }
+            }
+        }
     }
 }

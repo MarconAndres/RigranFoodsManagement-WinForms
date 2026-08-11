@@ -39,6 +39,22 @@ namespace Business
             _customerContactRepo.Update(customerContact);
         }
 
+        public CustomerContact GetById(int id)
+        {
+            try
+            {
+                if (id <= 0)
+                {
+                    throw new Exception("Error: The Customer Contact ID is not valid.");
+                }
+                return _customerContactRepo.GetById(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error retrieving customer contact by ID: " + ex.Message);
+            }
+        }
+
         private void ValidateContact (CustomerContact customerContact)
         {
             if (customerContact == null)

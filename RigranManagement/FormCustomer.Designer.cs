@@ -50,7 +50,7 @@
             // 
             btnInsertCustomer.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
             btnInsertCustomer.Font = new Font("Segoe UI", 11F);
-            btnInsertCustomer.Location = new Point(12, 92);
+            btnInsertCustomer.Location = new Point(30, 92);
             btnInsertCustomer.Name = "btnInsertCustomer";
             btnInsertCustomer.Size = new Size(75, 29);
             btnInsertCustomer.TabIndex = 1;
@@ -62,7 +62,7 @@
             // 
             btnUpdateCustomer.FlatAppearance.MouseOverBackColor = Color.FromArgb(192, 255, 255);
             btnUpdateCustomer.Font = new Font("Segoe UI", 11F);
-            btnUpdateCustomer.Location = new Point(111, 92);
+            btnUpdateCustomer.Location = new Point(128, 92);
             btnUpdateCustomer.Name = "btnUpdateCustomer";
             btnUpdateCustomer.Size = new Size(75, 29);
             btnUpdateCustomer.TabIndex = 2;

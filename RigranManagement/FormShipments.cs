@@ -14,10 +14,14 @@ namespace Winform
     public partial class FormShipments : Form
     {
         private readonly ShipmentsService _shipmentService;
+
+        private List<dynamic> _allShipments;
+
         public FormShipments()
         {
             InitializeComponent();
             _shipmentService = new ShipmentsService();
+            _allShipments = new List<dynamic>();
         }
         private void refreshDgv()
         {
@@ -71,9 +75,10 @@ namespace Winform
                                       Notes = shipments.Notes
                                   };
 
-
                 dgvShipments.DataSource = null;
-                dgvShipments.DataSource = displaylist.ToList();
+                var shipmentsViewList = displaylist.ToList();
+                _allShipments = shipmentsViewList.Select(x => (dynamic)x).ToList();
+                dgvShipments.DataSource = shipmentsViewList;
             }
             catch (Exception ex)
             {
@@ -83,6 +88,18 @@ namespace Winform
 
         private void formatDgv()
         {
+            dgvShipments.Columns["ShipmentStatus"].HeaderText = "Shipment Status";
+            dgvShipments.Columns["BookingNumber"].HeaderText = "Booking Number";
+            dgvShipments.Columns["ContainerNumber"].HeaderText = "Container Number";
+            dgvShipments.Columns["ContainerType"].HeaderText = "Container Type";
+            dgvShipments.Columns["ShippingLine"].HeaderText = "Shipping Line";
+            dgvShipments.Columns["PortOfLoading"].HeaderText = "Port of Loading";
+            dgvShipments.Columns["PortOfDestination"].HeaderText = "Port of Destination";
+            dgvShipments.Columns["FreeDays"].HeaderText = "Free Days";
+            dgvShipments.Columns["BLApproved"].HeaderText = "BL Approved";
+            dgvShipments.Columns["DHLNumber"].HeaderText = "DHL Number";
+            dgvShipments.Columns["HasClaim"].HeaderText = "Has Claim";
+            dgvShipments.Columns["ClaimNote"].HeaderText = "Claim Notes";
             dgvShipments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvShipments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvShipments.MultiSelect = false;
@@ -92,8 +109,8 @@ namespace Winform
 
         private void FormShipments_Load(object sender, EventArgs e)
         {
-            formatDgv();
             refreshDgv();
+            formatDgv();
         }
 
         private void btnInsert_Click(object sender, EventArgs e)
@@ -130,6 +147,31 @@ namespace Winform
             {
                 MessageBox.Show("Error updating shipment:" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw;
+            }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (_allShipments == null)
+            {
+                return;
+            }
+            string filteredText = txtSearch.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(filteredText))
+            {
+                dgvShipments.DataSource = _allShipments;
+            }
+            else
+            {
+                var filteredList = _allShipments.Where(s => s.BookingNumber.ToLower().Contains(filteredText) ||
+                                                            s.Sales.ToString().Contains(filteredText) ||
+                                                            s.ContainerNumber.ToLower().Contains(filteredText) ||
+                                                            s.ShippingLine.ToLower().Contains(filteredText) ||
+                                                            s.PortOfLoading.ToLower().Contains(filteredText) ||
+                                                            s.ShipmentStatus.ToLower().Contains(filteredText) ||
+                                                            s.PortOfDestination.ToLower().Contains(filteredText)).ToList();
+                dgvShipments.DataSource = filteredList;
             }
         }
     }

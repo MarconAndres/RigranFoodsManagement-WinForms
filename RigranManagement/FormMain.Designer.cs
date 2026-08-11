@@ -90,6 +90,7 @@
             btnCustomerContact.TabIndex = 6;
             btnCustomerContact.Text = "Customer Contact";
             btnCustomerContact.UseVisualStyleBackColor = false;
+            btnCustomerContact.Click += btnCustomerContact_Click;
             // 
             // buttonCustomer
             // 

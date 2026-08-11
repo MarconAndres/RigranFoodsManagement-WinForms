@@ -31,6 +31,8 @@
             dgvShipments = new DataGridView();
             btnInsert = new Button();
             btnUpdate = new Button();
+            txtSearch = new TextBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvShipments).BeginInit();
             SuspendLayout();
             // 
@@ -67,11 +69,31 @@
             btnUpdate.UseVisualStyleBackColor = true;
             btnUpdate.Click += btnUpdate_Click;
             // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(98, 32);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(194, 23);
+            txtSearch.TabIndex = 5;
+            txtSearch.TextChanged += txtSearch_TextChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(32, 34);
+            label1.Name = "label1";
+            label1.Size = new Size(60, 21);
+            label1.TabIndex = 6;
+            label1.Text = "Search:";
+            // 
             // FormShipments
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
+            Controls.Add(txtSearch);
             Controls.Add(btnUpdate);
             Controls.Add(btnInsert);
             Controls.Add(dgvShipments);
@@ -81,6 +103,7 @@
             Load += FormShipments_Load;
             ((System.ComponentModel.ISupportInitialize)dgvShipments).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -88,5 +111,7 @@
         private DataGridView dgvShipments;
         private Button btnInsert;
         private Button btnUpdate;
+        private TextBox txtSearch;
+        private Label label1;
     }
 }
