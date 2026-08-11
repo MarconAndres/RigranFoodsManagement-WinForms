@@ -120,7 +120,7 @@ namespace Winform
             {
                 int selectedID = (int)dgvCustomerContact.CurrentRow.Cells["ID"].Value;
                 CustomerContact customerContactToEdit = _customerContactService.GetById(selectedID);
-                
+
                 if (customerContactToEdit != null)
                 {
                     FormCustomerContactDetail formCustomerContactDetail = new FormCustomerContactDetail(customerContactToEdit);
@@ -133,6 +133,32 @@ namespace Winform
             catch (Exception ex)
             {
                 MessageBox.Show($"Error updating contact: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (_allContacts == null)
+            {
+                return;
+            }
+            string searchText = txtSearch.Text.Trim().ToLower();
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                dgvCustomerContact.DataSource = _allContacts;
+            }
+            else
+            {
+                var filteredContacts = _allContacts.Where(contact =>
+                    (contact.CustomerName != null && contact.CustomerName.ToLower().Contains(searchText)) ||
+                    (contact.FirstName != null && contact.FirstName.ToLower().Contains(searchText)) ||
+                    (contact.LastName != null && contact.LastName.ToLower().Contains(searchText)) ||
+                    (contact.RolePosition != null && contact.RolePosition.ToLower().Contains(searchText)) ||
+                    (contact.Email != null && contact.Email.ToLower().Contains(searchText)) ||
+                    (contact.PhoneNumber != null && contact.PhoneNumber.ToLower().Contains(searchText))
+                ).ToList();
+                dgvCustomerContact.DataSource = null;
+                dgvCustomerContact.DataSource = filteredContacts;
             }
         }
     }

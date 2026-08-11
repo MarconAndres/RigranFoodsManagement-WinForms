@@ -31,6 +31,8 @@
             dgvCustomerContact = new DataGridView();
             btnInsertCustomerContact = new Button();
             btnUpdateCustomerContact = new Button();
+            label1 = new Label();
+            txtSearch = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvCustomerContact).BeginInit();
             SuspendLayout();
             // 
@@ -67,11 +69,31 @@
             btnUpdateCustomerContact.UseVisualStyleBackColor = true;
             btnUpdateCustomerContact.Click += btnUpdateCustomerContact_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(39, 27);
+            label1.Name = "label1";
+            label1.Size = new Size(60, 21);
+            label1.TabIndex = 7;
+            label1.Text = "Search:";
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(105, 25);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(194, 23);
+            txtSearch.TabIndex = 8;
+            txtSearch.TextChanged += txtSearch_TextChanged;
+            // 
             // FormCustomerContact
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(txtSearch);
+            Controls.Add(label1);
             Controls.Add(btnUpdateCustomerContact);
             Controls.Add(btnInsertCustomerContact);
             Controls.Add(dgvCustomerContact);
@@ -81,6 +103,7 @@
             Load += FormCustomerContact_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCustomerContact).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -88,5 +111,7 @@
         private DataGridView dgvCustomerContact;
         private Button btnInsertCustomerContact;
         private Button btnUpdateCustomerContact;
+        private Label label1;
+        private TextBox txtSearch;
     }
 }

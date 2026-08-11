@@ -31,6 +31,8 @@
             dgvFormSales = new DataGridView();
             btnInsertFormSale = new Button();
             btnUpdateFormSale = new Button();
+            label1 = new Label();
+            txtSearch = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvFormSales).BeginInit();
             SuspendLayout();
             // 
@@ -67,11 +69,31 @@
             btnUpdateFormSale.UseVisualStyleBackColor = true;
             btnUpdateFormSale.Click += btnUpdateFormSale_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(41, 23);
+            label1.Name = "label1";
+            label1.Size = new Size(60, 21);
+            label1.TabIndex = 7;
+            label1.Text = "Search:";
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(107, 21);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(194, 23);
+            txtSearch.TabIndex = 8;
+            txtSearch.TextChanged += txtSearch_TextChanged;
+            // 
             // FormSales
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(txtSearch);
+            Controls.Add(label1);
             Controls.Add(btnUpdateFormSale);
             Controls.Add(btnInsertFormSale);
             Controls.Add(dgvFormSales);
@@ -81,6 +103,7 @@
             Load += FormSales_Load_1;
             ((System.ComponentModel.ISupportInitialize)dgvFormSales).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -88,5 +111,7 @@
         private DataGridView dgvFormSales;
         private Button btnInsertFormSale;
         private Button btnUpdateFormSale;
+        private Label label1;
+        private TextBox txtSearch;
     }
 }

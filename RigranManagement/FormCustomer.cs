@@ -156,6 +156,7 @@ namespace Winform
                     (c.Country != null && c.Country.ToLower().Contains(filterText))
                     ).ToList();
 
+                dgvCustomer.DataSource = null;
                 dgvCustomer.DataSource = filteredList;
             }
         }

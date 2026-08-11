@@ -13,10 +13,12 @@ namespace Winform
     public partial class FormSales : Form
     {
         private readonly SalesService _salesService;
+        private List<dynamic> _allSales;
         public FormSales()
         {
             InitializeComponent();
             _salesService = new SalesService();
+            _allSales = new List<dynamic>();
         }
 
 
@@ -25,7 +27,7 @@ namespace Winform
             try
             {
                 List<Sales> salesList = _salesService.GetAll();
-               
+
                 CustomerService _customerService = new CustomerService();
                 List<Customer> customerList = _customerService.GetAll();
                 ProductMasterService _productService = new ProductMasterService();
@@ -41,10 +43,10 @@ namespace Winform
                 PortsService _portsService = new PortsService();
                 List<Ports> portList = _portsService.GetAll();
 
-                
+
                 var displayList = from sale in salesList
 
-                                  
+
                                   join cust in customerList on sale.IdCustomer equals cust.ID into custGroup
                                   from customer in custGroup.DefaultIfEmpty()
 
@@ -72,9 +74,9 @@ namespace Winform
                                   select new
                                   {
                                       ID = sale.ID,
-                                      Customer = customer != null ? customer.Name : "N/A", 
-                                      Product = product != null ? product.Name : "N/A",   
-                                      Status = status != null ? status.Name : "N/A",       
+                                      Customer = customer != null ? customer.Name : "N/A",
+                                      Product = product != null ? product.Name : "N/A",
+                                      Status = status != null ? status.Name : "N/A",
                                       ContractDate = sale.ContractDate.ToString(),
                                       Shipper = sale.Shipper,
                                       Seller = sale.Seller,
@@ -89,10 +91,12 @@ namespace Winform
                                       BrokerCommission = sale.BrokerComissionPc
                                   };
 
-                
+
 
                 dgvFormSales.DataSource = null;
-                dgvFormSales.DataSource = displayList.ToList();
+                var salesViewList = displayList.ToList();
+                _allSales = salesViewList.Select(x => (dynamic)x).ToList();
+                dgvFormSales.DataSource = salesViewList;
             }
             catch (Exception ex)
             {
@@ -155,6 +159,41 @@ namespace Winform
             {
 
                 MessageBox.Show("Error opening edit window: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+            }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (_allSales == null)
+            {
+                return;
+            }
+            string searchText = txtSearch.Text.Trim().ToLower();
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                dgvFormSales.DataSource = _allSales;
+            }
+            else
+            {
+                var filteredSales = _allSales.Where(sale =>
+                                                            (sale.Customer != null && sale.Customer.ToLower().Contains(searchText)) ||
+                                                            (sale.Product != null && sale.Product.ToLower().Contains(searchText)) ||
+                                                            (sale.Status != null && sale.Status.ToLower().Contains(searchText)) ||
+                                                            (sale.ContractDate != null && sale.ContractDate.ToLower().Contains(searchText)) ||
+                                                            (sale.Shipper != null && sale.Shipper.ToLower().Contains(searchText)) ||
+                                                            (sale.Seller != null && sale.Seller.ToLower().Contains(searchText)) ||
+                                                            (sale.CropYear != null && sale.CropYear.ToString().ToLower().Contains(searchText)) ||
+                                                            (sale.Quantity != null && sale.Quantity.ToString().ToLower().Contains(searchText)) ||
+                                                            (sale.PricePerTon != null && sale.PricePerTon.ToString().ToLower().Contains(searchText)) ||
+                                                            (sale.Currency != null && sale.Currency.ToLower().Contains(searchText)) ||
+                                                            (sale.IncoTerm != null && sale.IncoTerm.ToLower().Contains(searchText)) ||
+                                                            (sale.MethodOfPayment != null && sale.MethodOfPayment.ToLower().Contains(searchText)) ||
+                                                            (sale.PortOfLoading != null && sale.PortOfLoading.ToLower().Contains(searchText)) ||
+                                                            (sale.PortOfDestination != null && sale.PortOfDestination.ToLower().Contains(searchText)) ||
+                                                            (sale.BrokerCommission != null && sale.BrokerCommission.ToString().ToLower().Contains(searchText))
+                ).ToList();
+                dgvFormSales.DataSource = null;
+                dgvFormSales.DataSource = filteredSales;
             }
         }
     }
