@@ -2,5 +2,5 @@
   <Project Path="Business/Business.csproj" Id="19a32970-fd93-4b28-8d53-d94fc664a7b1" />
   <Project Path="DataAccess/DataAccess.csproj" Id="0602f834-2214-45ff-acdc-8cf9180da2df" />
   <Project Path="Entities/Entities.csproj" Id="ae37b22d-c38c-463d-b7d5-0cd02329eeac" />
-  <Project Path="RigranManagement/Winform.csproj" />
+  <Project Path="RigranManagement/Winforms.csproj" />
 </Solution>

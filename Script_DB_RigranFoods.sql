@@ -1,12 +1,5 @@
 
-USE MASTER;
-GO
 
-CREATE DATABASE RigranFoods_DB
-GO 
-
-USE RigranFoods_DB;
-GO
 
 CREATE TABLE ProductType(
 ID int IDENTITY(1,1) NOT NULL,
@@ -107,7 +100,7 @@ GO
 
 CREATE TABLE BusinessSector(
 ID INT IDENTITY (1,1) NOT NULL,
-Description VARCHAR (50)
+Description VARCHAR (50),
 CONSTRAINT PK_BusinessSector PRIMARY KEY (ID)
 );
 GO

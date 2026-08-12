@@ -480,3 +480,9 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+#Exclude real Azure Credencials
+**/App.config
+
+#Keep public blueprint for Git
+!**/App.config.template
