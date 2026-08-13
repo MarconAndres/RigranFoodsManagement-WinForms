@@ -57,8 +57,23 @@ namespace Winform
                     txtCustomerEORI.Text = _currentCustomer.EORI;
                     txtCustomerBio.Text = _currentCustomer.BIO;
 
-                    cmbCustomerBusinessSector.SelectedValue = _currentCustomer.IdBusinessSector;
-                    cmbCustomerCountry.SelectedValue = _currentCustomer.IdCountry;
+                    if (_currentCustomer.IdBusinessSector.HasValue && _currentCustomer.IdBusinessSector.Value > 0)
+                    {
+                        cmbCustomerBusinessSector.SelectedValue = _currentCustomer.IdBusinessSector.Value;
+                    }
+                    else
+                    {
+                        cmbCustomerBusinessSector.SelectedIndex = -1;
+                    }
+
+                    if (_currentCustomer.IdCountry.HasValue && _currentCustomer.IdCountry.Value > 0)
+                    {
+                        cmbCustomerCountry.SelectedValue = _currentCustomer.IdCountry.Value;
+                    }
+                    else
+                    {
+                        cmbCustomerCountry.SelectedIndex = -1;
+                    }
 
                     if (_currentCustomer.Active)
                     {
@@ -90,9 +105,15 @@ namespace Winform
         {
 
             _currentCustomer.Name = txtCustomerName.Text.Trim();
-            _currentCustomer.IdBusinessSector = cmbCustomerBusinessSector.SelectedIndex == -1
-                ? (int?)null
-                : (int)cmbCustomerBusinessSector.SelectedValue;
+            
+            if (cmbCustomerBusinessSector.SelectedIndex == -1 || cmbCustomerBusinessSector.SelectedValue == null)
+            {
+                _currentCustomer.IdBusinessSector = null;
+            }
+            else
+            {
+                _currentCustomer.IdBusinessSector = (int)cmbCustomerBusinessSector.SelectedValue;
+            }
             _currentCustomer.RegisteredName = txtCustomerRegisteredName.Text.Trim();
             _currentCustomer.Address = txtCustomerAddress.Text.Trim();
             _currentCustomer.IdCountry = cmbCustomerCountry.SelectedIndex == -1

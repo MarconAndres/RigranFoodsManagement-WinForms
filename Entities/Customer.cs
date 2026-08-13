@@ -14,7 +14,7 @@ namespace Entities
         public string Address { get; set; }
         public string Email { get; set; }
         public string VAT { get; set; }
-        public int IdCountry { get; set; }
+        public int? IdCountry { get; set; }
         public string PhoneNumber { get; set; }
         public string BIO { get; set; }
         public string EORI { get; set; }
