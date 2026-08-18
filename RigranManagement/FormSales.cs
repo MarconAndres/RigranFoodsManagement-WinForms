@@ -97,6 +97,7 @@ namespace Winform
                 var salesViewList = displayList.ToList();
                 _allSales = salesViewList.Select(x => (dynamic)x).ToList();
                 dgvFormSales.DataSource = salesViewList;
+                FormatDgv();
             }
             catch (Exception ex)
             {

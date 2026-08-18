@@ -71,6 +71,7 @@ namespace Winform
                 _allCustomers = customerViewList.Select(x => (dynamic)x).ToList();
 
                 dgvCustomer.DataSource = customerViewList;
+                FormatDgv();
             }
             catch (Exception ex)
             {

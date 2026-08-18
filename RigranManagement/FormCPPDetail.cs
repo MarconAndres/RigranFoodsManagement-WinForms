@@ -74,10 +74,42 @@ namespace Winform
 
                     cmbCustomer.SelectedValue = _CurrentCustomerProductProfile.IdCustomer;
                     cmbProduct.SelectedValue = _CurrentCustomerProductProfile.IdProductMaster;
-                    cmbPreferredPackaging.SelectedValue = _CurrentCustomerProductProfile.IdPreferredPackaging;
-                    cmbPurchaseFrequency.SelectedValue = _CurrentCustomerProductProfile.IdPurchaseFrequency;
-                    cmbPriceSensitivity.SelectedValue = _CurrentCustomerProductProfile.IdPriceSensitivity;
-                    cmbQualityStandard.SelectedValue = _CurrentCustomerProductProfile.IdQualityStandart;
+                    
+                    if (_CurrentCustomerProductProfile.IdPreferredPackaging.HasValue && _CurrentCustomerProductProfile.IdPreferredPackaging.Value > 0)
+                    {
+                        cmbPreferredPackaging.SelectedValue = _CurrentCustomerProductProfile.IdPreferredPackaging.Value;
+                    }
+                    else
+                    {
+                        cmbPreferredPackaging.SelectedIndex = -1;
+                    }
+
+                    if (_CurrentCustomerProductProfile.IdPurchaseFrequency.HasValue && _CurrentCustomerProductProfile.IdPurchaseFrequency.Value > 0)
+                    {
+                        cmbPurchaseFrequency.SelectedValue = _CurrentCustomerProductProfile.IdPurchaseFrequency.Value;
+                    }
+                    else
+                    {
+                        cmbPurchaseFrequency.SelectedIndex = -1;
+                    }
+
+                    if (_CurrentCustomerProductProfile.IdPriceSensitivity.HasValue && _CurrentCustomerProductProfile.IdPriceSensitivity.Value > 0)
+                    {
+                        cmbPriceSensitivity.SelectedValue = _CurrentCustomerProductProfile.IdPriceSensitivity.Value;
+                    }
+                    else
+                    {
+                        cmbPriceSensitivity.SelectedIndex = -1;
+                    }
+
+                    if (_CurrentCustomerProductProfile.IdQualityStandart.HasValue && _CurrentCustomerProductProfile.IdQualityStandart.Value > 0)
+                    {
+                        cmbQualityStandard.SelectedValue = _CurrentCustomerProductProfile.IdQualityStandart.Value;
+                    }
+                    else
+                    {
+                        cmbQualityStandard.SelectedIndex = -1;
+                    }
                 }
                 else
                 {

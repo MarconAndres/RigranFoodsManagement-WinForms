@@ -56,6 +56,7 @@ namespace Winform
                 var customerContactsviewlist = contactListWithCustomer.ToList();
                 _allContacts = customerContactsviewlist.Select(x => (dynamic)x).ToList();
                 dgvCustomerContact.DataSource = customerContactsviewlist;
+                FormatDgv();
             }
             catch (Exception ex)
             {

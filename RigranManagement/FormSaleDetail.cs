@@ -92,8 +92,23 @@ namespace Winform
                     cmbCurrency.SelectedValue = _currentSale.IdCurrency;
                     cmbIncoterm.SelectedValue = _currentSale.IdIncoTerm;
                     cmbMethodOfPayment.SelectedValue = _currentSale.IdMethodOfPayment;
-                    cmbPortOfLoading.SelectedValue = _currentSale.IdPortOfLoading;
-                    cmbPortOfDestination.SelectedValue = _currentSale.IdPortOfDestination;
+
+                    if (_currentSale.IdPortOfLoading.HasValue && _currentSale.IdPortOfLoading.Value > 0)
+                    {
+                        cmbPortOfLoading.SelectedValue = _currentSale.IdPortOfLoading.Value;
+                    }
+                    else
+                    {
+                        cmbPortOfLoading.SelectedIndex = -1;
+                    }
+                    if (_currentSale.IdPortOfDestination.HasValue && _currentSale.IdPortOfDestination.Value > 0)
+                    {
+                        cmbPortOfDestination.SelectedValue = _currentSale.IdPortOfDestination.Value;
+                    }
+                    else
+                    {
+                        cmbPortOfDestination.SelectedIndex = -1;
+                    }
                 }
                 else
                 {
@@ -148,15 +163,24 @@ namespace Winform
                 _currentSale.IdMethodOfPayment = cmbMethodOfPayment.SelectedIndex == -1
                     ? 0
                     : (int)cmbMethodOfPayment.SelectedValue;
-                _currentSale.IdPortOfLoading = cmbPortOfLoading.SelectedIndex == -1
-                    ? (int?)null
-                    : (int)cmbPortOfLoading.SelectedValue;
-                _currentSale.IdPortOfDestination = cmbPortOfDestination.SelectedIndex == -1
-                    ? (int?)null
-                    : (int)cmbPortOfDestination.SelectedValue;
+                if (cmbPortOfLoading.SelectedIndex == -1 || cmbPortOfLoading.SelectedValue == null)
+                {
+                    _currentSale.IdPortOfLoading = null;
+                }
+                else
+                {
+                    _currentSale.IdPortOfLoading = (int)cmbPortOfLoading.SelectedValue;
+                }
+                if (cmbPortOfDestination.SelectedIndex == -1 || cmbPortOfDestination.SelectedValue == null)
+                {
+                    _currentSale.IdPortOfDestination = null;
+                }
+                else
+                {
+                    _currentSale.IdPortOfDestination = (int)cmbPortOfDestination.SelectedValue;
+                }
 
-
-
+               
                 if (_isEditMode)
                 {
                     _salesService.Update(_currentSale);

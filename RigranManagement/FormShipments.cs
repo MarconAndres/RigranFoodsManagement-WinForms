@@ -79,6 +79,7 @@ namespace Winform
                 var shipmentsViewList = displaylist.ToList();
                 _allShipments = shipmentsViewList.Select(x => (dynamic)x).ToList();
                 dgvShipments.DataSource = shipmentsViewList;
+                formatDgv();
             }
             catch (Exception ex)
             {
