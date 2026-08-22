@@ -74,13 +74,15 @@
             label9 = new Label();
             label10 = new Label();
             label11 = new Label();
+            label12 = new Label();
+            cmbSize = new ComboBox();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13F, FontStyle.Underline);
-            label1.Location = new Point(308, 41);
+            label1.Location = new Point(353, 28);
             label1.Name = "label1";
             label1.Size = new Size(141, 25);
             label1.TabIndex = 0;
@@ -90,7 +92,7 @@
             // 
             labelCustomer.AutoSize = true;
             labelCustomer.Font = new Font("Segoe UI", 12F);
-            labelCustomer.Location = new Point(233, 94);
+            labelCustomer.Location = new Point(233, 101);
             labelCustomer.Name = "labelCustomer";
             labelCustomer.Size = new Size(81, 21);
             labelCustomer.TabIndex = 1;
@@ -99,7 +101,7 @@
             // cmbCustomer
             // 
             cmbCustomer.FormattingEnabled = true;
-            cmbCustomer.Location = new Point(328, 92);
+            cmbCustomer.Location = new Point(328, 99);
             cmbCustomer.Name = "cmbCustomer";
             cmbCustomer.Size = new Size(195, 23);
             cmbCustomer.TabIndex = 2;
@@ -121,12 +123,13 @@
             cmbProduct.Name = "cmbProduct";
             cmbProduct.Size = new Size(195, 23);
             cmbProduct.TabIndex = 4;
+            cmbProduct.SelectedIndexChanged += cmbProduct_SelectedIndexChanged;
             // 
             // labelStatus
             // 
             labelStatus.AutoSize = true;
             labelStatus.Font = new Font("Segoe UI", 12F);
-            labelStatus.Location = new Point(259, 168);
+            labelStatus.Location = new Point(259, 194);
             labelStatus.Name = "labelStatus";
             labelStatus.Size = new Size(55, 21);
             labelStatus.TabIndex = 5;
@@ -135,7 +138,7 @@
             // cmbStatus
             // 
             cmbStatus.FormattingEnabled = true;
-            cmbStatus.Location = new Point(328, 168);
+            cmbStatus.Location = new Point(328, 194);
             cmbStatus.Name = "cmbStatus";
             cmbStatus.Size = new Size(195, 23);
             cmbStatus.TabIndex = 6;
@@ -144,7 +147,7 @@
             // 
             labelContractDate.AutoSize = true;
             labelContractDate.Font = new Font("Segoe UI", 12F);
-            labelContractDate.Location = new Point(206, 204);
+            labelContractDate.Location = new Point(206, 230);
             labelContractDate.Name = "labelContractDate";
             labelContractDate.Size = new Size(108, 21);
             labelContractDate.TabIndex = 7;
@@ -152,7 +155,7 @@
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(328, 204);
+            dateTimePicker1.Location = new Point(328, 230);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(195, 23);
             dateTimePicker1.TabIndex = 8;
@@ -161,7 +164,7 @@
             // 
             labelShipper.AutoSize = true;
             labelShipper.Font = new Font("Segoe UI", 12F);
-            labelShipper.Location = new Point(247, 237);
+            labelShipper.Location = new Point(247, 263);
             labelShipper.Name = "labelShipper";
             labelShipper.Size = new Size(67, 21);
             labelShipper.TabIndex = 9;
@@ -169,7 +172,7 @@
             // 
             // txtShipper
             // 
-            txtShipper.Location = new Point(328, 237);
+            txtShipper.Location = new Point(328, 263);
             txtShipper.Name = "txtShipper";
             txtShipper.Size = new Size(195, 23);
             txtShipper.TabIndex = 10;
@@ -178,7 +181,7 @@
             // 
             labelSeller.AutoSize = true;
             labelSeller.Font = new Font("Segoe UI", 12F);
-            labelSeller.Location = new Point(262, 269);
+            labelSeller.Location = new Point(262, 295);
             labelSeller.Name = "labelSeller";
             labelSeller.Size = new Size(52, 21);
             labelSeller.TabIndex = 11;
@@ -186,7 +189,7 @@
             // 
             // txtSeller
             // 
-            txtSeller.Location = new Point(328, 269);
+            txtSeller.Location = new Point(328, 295);
             txtSeller.Name = "txtSeller";
             txtSeller.Size = new Size(195, 23);
             txtSeller.TabIndex = 12;
@@ -195,7 +198,7 @@
             // 
             labelCropYear.AutoSize = true;
             labelCropYear.Font = new Font("Segoe UI", 12F);
-            labelCropYear.Location = new Point(233, 302);
+            labelCropYear.Location = new Point(233, 328);
             labelCropYear.Name = "labelCropYear";
             labelCropYear.Size = new Size(81, 21);
             labelCropYear.TabIndex = 13;
@@ -203,7 +206,7 @@
             // 
             // txtCropYear
             // 
-            txtCropYear.Location = new Point(328, 302);
+            txtCropYear.Location = new Point(328, 328);
             txtCropYear.Name = "txtCropYear";
             txtCropYear.Size = new Size(195, 23);
             txtCropYear.TabIndex = 14;
@@ -212,7 +215,7 @@
             // 
             labelQuantity.AutoSize = true;
             labelQuantity.Font = new Font("Segoe UI", 12F);
-            labelQuantity.Location = new Point(241, 337);
+            labelQuantity.Location = new Point(241, 363);
             labelQuantity.Name = "labelQuantity";
             labelQuantity.Size = new Size(73, 21);
             labelQuantity.TabIndex = 15;
@@ -220,7 +223,7 @@
             // 
             // txtQuantity
             // 
-            txtQuantity.Location = new Point(328, 337);
+            txtQuantity.Location = new Point(328, 363);
             txtQuantity.Name = "txtQuantity";
             txtQuantity.Size = new Size(195, 23);
             txtQuantity.TabIndex = 16;
@@ -228,7 +231,7 @@
             // labelFormatQua
             // 
             labelFormatQua.AutoSize = true;
-            labelFormatQua.Location = new Point(542, 342);
+            labelFormatQua.Location = new Point(542, 368);
             labelFormatQua.Name = "labelFormatQua";
             labelFormatQua.Size = new Size(163, 15);
             labelFormatQua.TabIndex = 17;
@@ -238,7 +241,7 @@
             // 
             labelPricePerTone.AutoSize = true;
             labelPricePerTone.Font = new Font("Segoe UI", 12F);
-            labelPricePerTone.Location = new Point(212, 371);
+            labelPricePerTone.Location = new Point(212, 397);
             labelPricePerTone.Name = "labelPricePerTone";
             labelPricePerTone.Size = new Size(102, 21);
             labelPricePerTone.TabIndex = 18;
@@ -246,7 +249,7 @@
             // 
             // txtPricePerTon
             // 
-            txtPricePerTon.Location = new Point(328, 369);
+            txtPricePerTon.Location = new Point(328, 395);
             txtPricePerTon.Name = "txtPricePerTon";
             txtPricePerTon.Size = new Size(195, 23);
             txtPricePerTon.TabIndex = 19;
@@ -254,7 +257,7 @@
             // labelFormatPrice
             // 
             labelFormatPrice.AutoSize = true;
-            labelFormatPrice.Location = new Point(542, 377);
+            labelFormatPrice.Location = new Point(542, 403);
             labelFormatPrice.Name = "labelFormatPrice";
             labelFormatPrice.Size = new Size(169, 15);
             labelFormatPrice.TabIndex = 20;
@@ -264,7 +267,7 @@
             // 
             labelCurrency.AutoSize = true;
             labelCurrency.Font = new Font("Segoe UI", 12F);
-            labelCurrency.Location = new Point(233, 403);
+            labelCurrency.Location = new Point(233, 429);
             labelCurrency.Name = "labelCurrency";
             labelCurrency.Size = new Size(76, 21);
             labelCurrency.TabIndex = 21;
@@ -273,7 +276,7 @@
             // cmbCurrency
             // 
             cmbCurrency.FormattingEnabled = true;
-            cmbCurrency.Location = new Point(328, 403);
+            cmbCurrency.Location = new Point(328, 429);
             cmbCurrency.Name = "cmbCurrency";
             cmbCurrency.Size = new Size(195, 23);
             cmbCurrency.TabIndex = 22;
@@ -282,7 +285,7 @@
             // 
             labelIncoterm.AutoSize = true;
             labelIncoterm.Font = new Font("Segoe UI", 12F);
-            labelIncoterm.Location = new Point(233, 438);
+            labelIncoterm.Location = new Point(233, 464);
             labelIncoterm.Name = "labelIncoterm";
             labelIncoterm.Size = new Size(75, 21);
             labelIncoterm.TabIndex = 23;
@@ -291,7 +294,7 @@
             // cmbIncoterm
             // 
             cmbIncoterm.FormattingEnabled = true;
-            cmbIncoterm.Location = new Point(328, 438);
+            cmbIncoterm.Location = new Point(328, 464);
             cmbIncoterm.Name = "cmbIncoterm";
             cmbIncoterm.Size = new Size(195, 23);
             cmbIncoterm.TabIndex = 24;
@@ -300,7 +303,7 @@
             // 
             labelMethodOfPayment.AutoSize = true;
             labelMethodOfPayment.Font = new Font("Segoe UI", 12F);
-            labelMethodOfPayment.Location = new Point(159, 474);
+            labelMethodOfPayment.Location = new Point(159, 500);
             labelMethodOfPayment.Name = "labelMethodOfPayment";
             labelMethodOfPayment.Size = new Size(149, 21);
             labelMethodOfPayment.TabIndex = 25;
@@ -309,7 +312,7 @@
             // cmbMethodOfPayment
             // 
             cmbMethodOfPayment.FormattingEnabled = true;
-            cmbMethodOfPayment.Location = new Point(328, 472);
+            cmbMethodOfPayment.Location = new Point(328, 498);
             cmbMethodOfPayment.Name = "cmbMethodOfPayment";
             cmbMethodOfPayment.Size = new Size(195, 23);
             cmbMethodOfPayment.TabIndex = 26;
@@ -318,7 +321,7 @@
             // 
             labelPortOfLoading.AutoSize = true;
             labelPortOfLoading.Font = new Font("Segoe UI", 12F);
-            labelPortOfLoading.Location = new Point(193, 511);
+            labelPortOfLoading.Location = new Point(193, 537);
             labelPortOfLoading.Name = "labelPortOfLoading";
             labelPortOfLoading.Size = new Size(115, 21);
             labelPortOfLoading.TabIndex = 27;
@@ -327,7 +330,7 @@
             // cmbPortOfLoading
             // 
             cmbPortOfLoading.FormattingEnabled = true;
-            cmbPortOfLoading.Location = new Point(328, 511);
+            cmbPortOfLoading.Location = new Point(328, 537);
             cmbPortOfLoading.Name = "cmbPortOfLoading";
             cmbPortOfLoading.Size = new Size(195, 23);
             cmbPortOfLoading.TabIndex = 28;
@@ -336,7 +339,7 @@
             // 
             labelPortOfDestination.AutoSize = true;
             labelPortOfDestination.Font = new Font("Segoe UI", 12F);
-            labelPortOfDestination.Location = new Point(166, 547);
+            labelPortOfDestination.Location = new Point(166, 573);
             labelPortOfDestination.Name = "labelPortOfDestination";
             labelPortOfDestination.Size = new Size(142, 21);
             labelPortOfDestination.TabIndex = 29;
@@ -345,7 +348,7 @@
             // cmbPortOfDestination
             // 
             cmbPortOfDestination.FormattingEnabled = true;
-            cmbPortOfDestination.Location = new Point(328, 549);
+            cmbPortOfDestination.Location = new Point(328, 575);
             cmbPortOfDestination.Name = "cmbPortOfDestination";
             cmbPortOfDestination.Size = new Size(195, 23);
             cmbPortOfDestination.TabIndex = 30;
@@ -354,7 +357,7 @@
             // 
             labelBrokerCom.AutoSize = true;
             labelBrokerCom.Font = new Font("Segoe UI", 12F);
-            labelBrokerCom.Location = new Point(172, 584);
+            labelBrokerCom.Location = new Point(172, 610);
             labelBrokerCom.Name = "labelBrokerCom";
             labelBrokerCom.Size = new Size(136, 21);
             labelBrokerCom.TabIndex = 31;
@@ -362,7 +365,7 @@
             // 
             // txtBrokerComission
             // 
-            txtBrokerComission.Location = new Point(328, 584);
+            txtBrokerComission.Location = new Point(328, 610);
             txtBrokerComission.Name = "txtBrokerComission";
             txtBrokerComission.Size = new Size(195, 23);
             txtBrokerComission.TabIndex = 32;
@@ -370,7 +373,7 @@
             // labelBrokerComFormat
             // 
             labelBrokerComFormat.AutoSize = true;
-            labelBrokerComFormat.Location = new Point(536, 592);
+            labelBrokerComFormat.Location = new Point(536, 618);
             labelBrokerComFormat.Name = "labelBrokerComFormat";
             labelBrokerComFormat.Size = new Size(142, 15);
             labelBrokerComFormat.TabIndex = 33;
@@ -379,7 +382,7 @@
             // btnSave
             // 
             btnSave.Font = new Font("Segoe UI", 12F);
-            btnSave.Location = new Point(261, 646);
+            btnSave.Location = new Point(293, 672);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(75, 34);
             btnSave.TabIndex = 34;
@@ -390,7 +393,7 @@
             // btnCancel
             // 
             btnCancel.Font = new Font("Segoe UI", 12F);
-            btnCancel.Location = new Point(430, 646);
+            btnCancel.Location = new Point(469, 672);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(75, 34);
             btnCancel.TabIndex = 35;
@@ -403,7 +406,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F);
             label2.ForeColor = Color.Red;
-            label2.Location = new Point(529, 96);
+            label2.Location = new Point(529, 103);
             label2.Name = "label2";
             label2.Size = new Size(15, 19);
             label2.TabIndex = 36;
@@ -414,7 +417,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F);
             label3.ForeColor = Color.Red;
-            label3.Location = new Point(529, 136);
+            label3.Location = new Point(529, 132);
             label3.Name = "label3";
             label3.Size = new Size(15, 19);
             label3.TabIndex = 37;
@@ -425,7 +428,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10F);
             label4.ForeColor = Color.Red;
-            label4.Location = new Point(529, 172);
+            label4.Location = new Point(529, 198);
             label4.Name = "label4";
             label4.Size = new Size(15, 19);
             label4.TabIndex = 38;
@@ -436,7 +439,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 10F);
             label5.ForeColor = Color.Red;
-            label5.Location = new Point(529, 208);
+            label5.Location = new Point(529, 234);
             label5.Name = "label5";
             label5.Size = new Size(15, 19);
             label5.TabIndex = 39;
@@ -447,7 +450,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 10F);
             label6.ForeColor = Color.Red;
-            label6.Location = new Point(529, 306);
+            label6.Location = new Point(529, 332);
             label6.Name = "label6";
             label6.Size = new Size(15, 19);
             label6.TabIndex = 40;
@@ -458,7 +461,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 10F);
             label7.ForeColor = Color.Red;
-            label7.Location = new Point(529, 342);
+            label7.Location = new Point(529, 368);
             label7.Name = "label7";
             label7.Size = new Size(15, 19);
             label7.TabIndex = 41;
@@ -469,7 +472,7 @@
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 10F);
             label8.ForeColor = Color.Red;
-            label8.Location = new Point(529, 373);
+            label8.Location = new Point(529, 399);
             label8.Name = "label8";
             label8.Size = new Size(15, 19);
             label8.TabIndex = 42;
@@ -480,7 +483,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 10F);
             label9.ForeColor = Color.Red;
-            label9.Location = new Point(529, 407);
+            label9.Location = new Point(529, 433);
             label9.Name = "label9";
             label9.Size = new Size(15, 19);
             label9.TabIndex = 43;
@@ -491,7 +494,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 10F);
             label10.ForeColor = Color.Red;
-            label10.Location = new Point(529, 442);
+            label10.Location = new Point(529, 468);
             label10.Name = "label10";
             label10.Size = new Size(15, 19);
             label10.TabIndex = 44;
@@ -502,17 +505,37 @@
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 10F);
             label11.ForeColor = Color.Red;
-            label11.Location = new Point(529, 474);
+            label11.Location = new Point(529, 500);
             label11.Name = "label11";
             label11.Size = new Size(15, 19);
             label11.TabIndex = 45;
             label11.Text = "*";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 12F);
+            label12.Location = new Point(273, 161);
+            label12.Name = "label12";
+            label12.Size = new Size(41, 21);
+            label12.TabIndex = 46;
+            label12.Text = "Size:";
+            // 
+            // cmbSize
+            // 
+            cmbSize.FormattingEnabled = true;
+            cmbSize.Location = new Point(328, 161);
+            cmbSize.Name = "cmbSize";
+            cmbSize.Size = new Size(195, 23);
+            cmbSize.TabIndex = 47;
             // 
             // FormSaleDetail
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 722);
+            Controls.Add(cmbSize);
+            Controls.Add(label12);
             Controls.Add(label11);
             Controls.Add(label10);
             Controls.Add(label9);
@@ -616,5 +639,7 @@
         private Label label9;
         private Label label10;
         private Label label11;
+        private Label label12;
+        private ComboBox cmbSize;
     }
 }

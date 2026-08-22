@@ -32,6 +32,8 @@ namespace Winform
                 List<Customer> customerList = _customerService.GetAll();
                 ProductMasterService _productService = new ProductMasterService();
                 List<ProductMaster> productList = _productService.GetAll();
+                ProductSpecificationsService _productSpecService = new ProductSpecificationsService();
+                List<ProductSpecifications> productSpecList = _productSpecService.GetAll();
                 StatusService _statusService = new StatusService();
                 List<Status> statusList = _statusService.GetAll();
                 CurrencyService _currencyService = new CurrencyService();
@@ -52,6 +54,9 @@ namespace Winform
 
                                   join prod in productList on sale.IdProduct equals prod.ID into prodGroup
                                   from product in prodGroup.DefaultIfEmpty()
+
+                                  join spec in productSpecList on sale.IdProductSpecifications equals spec.ID into specGroup
+                                  from productSpecification in specGroup.DefaultIfEmpty()
 
                                   join stat in statusList on sale.IdStatus equals stat.ID into statGroup
                                   from status in statGroup.DefaultIfEmpty()
@@ -76,6 +81,7 @@ namespace Winform
                                       ID = sale.ID,
                                       Customer = customer != null ? customer.Name : "N/A",
                                       Product = product != null ? product.Name : "N/A",
+                                      Size = productSpecification != null ? productSpecification.Size : "N/A",
                                       Status = status != null ? status.Name : "N/A",
                                       ContractDate = sale.ContractDate.ToString(),
                                       Shipper = sale.Shipper,

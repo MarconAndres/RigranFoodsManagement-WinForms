@@ -69,5 +69,13 @@ namespace Business
             }
             _productSpecificationsRepo.Update(productSpecifications);
         }
+        public ProductSpecifications GetById(int id)
+        {
+            if (id <= 0)
+            {
+                throw new Exception("Error: The ID provided is not valid.");
+            }
+            return _productSpecificationsRepo.GetById(id);
+        }
     }
 }

@@ -74,6 +74,8 @@ namespace Winform
                 cmbPortOfDestination.DisplayMember = "Name";
                 cmbPortOfDestination.ValueMember = "ID";
 
+                cmbProduct.SelectedIndexChanged += cmbProduct_SelectedIndexChanged;
+
                 if (_isEditMode && _currentSale != null)
                 {
                     this.Text = "Edit Sale";
@@ -92,6 +94,12 @@ namespace Winform
                     cmbCurrency.SelectedValue = _currentSale.IdCurrency;
                     cmbIncoterm.SelectedValue = _currentSale.IdIncoTerm;
                     cmbMethodOfPayment.SelectedValue = _currentSale.IdMethodOfPayment;
+
+                    
+                    if (_currentSale.IdProduct.HasValue)
+                    {
+                        LoadProductSize(_currentSale.IdProduct.Value);
+                    }
 
                     if (_currentSale.IdPortOfLoading.HasValue && _currentSale.IdPortOfLoading.Value > 0)
                     {
@@ -141,7 +149,7 @@ namespace Winform
                 else
                 {
                     _currentSale.BrokerComissionPc = decimal.Parse(txtBrokerComission.Text.Trim());
-                    
+
                 }
 
 
@@ -151,6 +159,16 @@ namespace Winform
                 _currentSale.IdProduct = cmbProduct.SelectedIndex == -1
                     ? 0
                     : (int)cmbProduct.SelectedValue;
+
+                if (cmbSize.SelectedIndex == -1 || cmbSize.SelectedValue == null)
+                {
+                    _currentSale.IdProductSpecifications = null;
+                }
+                else
+                {
+                    _currentSale.IdProductSpecifications = (int)cmbSize.SelectedValue;
+                }
+
                 _currentSale.IdStatus = cmbStatus.SelectedIndex == -1
                     ? 0
                     : (int)cmbStatus.SelectedValue;
@@ -180,7 +198,7 @@ namespace Winform
                     _currentSale.IdPortOfDestination = (int)cmbPortOfDestination.SelectedValue;
                 }
 
-               
+
                 if (_isEditMode)
                 {
                     _salesService.Update(_currentSale);
@@ -204,6 +222,38 @@ namespace Winform
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void LoadProductSize(int IdProduct)
+        {
+            ProductSpecificationsService specificationsService = new ProductSpecificationsService();
+
+            var productSizes = specificationsService.GetAll().Where(s => s.IdProductMaster == IdProduct).ToList();
+
+            cmbSize.DataSource = null;
+
+            if (productSizes.Any())
+            {
+                cmbSize.DataSource = productSizes;
+                cmbSize.DisplayMember = "Size";
+                cmbSize.ValueMember = "ID";
+                cmbSize.SelectedIndex = -1;
+            }
+        }
+
+        private void cmbProduct_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbProduct.SelectedIndex != -1 && cmbProduct.SelectedValue != null)
+            {
+                if (int.TryParse(cmbProduct.SelectedValue.ToString(), out int IdProduct))
+                {
+                    LoadProductSize(IdProduct);
+                }
+            }
+            else
+            {
+                cmbSize.DataSource = null;
+            }
         }
     }
 }

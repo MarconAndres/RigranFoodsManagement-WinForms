@@ -9,6 +9,7 @@ namespace Entities
         public int ID {  get; set; }
         public int? IdCustomer { get; set; }
         public int? IdProduct { get; set; }
+        public int? IdProductSpecifications { get; set; }
         public int? IdStatus { get; set; }
         public DateTime? ContractDate { get; set; }
         public string Shipper {  get; set; }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Winforms;
 
 namespace Winform
 {
@@ -62,6 +63,11 @@ namespace Winform
         private void btnCustomerContact_Click(object sender, EventArgs e)
         {
             OpenFormInPanelContainer(new FormCustomerContact());
+        }
+
+        private void btnProductSpecifications_Click(object sender, EventArgs e)
+        {
+            OpenFormInPanelContainer(new FormProductSpecifications());
         }
     }
 }

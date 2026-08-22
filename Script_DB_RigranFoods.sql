@@ -420,6 +420,7 @@ CREATE TABLE Sales(
 ID INT IDENTITY(1,1) NOT NULL,
 IdCustomer INT NOT NULL,
 IdProduct INT NOT NULL,
+IdProductSpecifications INT,
 IdStatus INT NOT NULL,
 ContractDate DATE NOT NULL,
 Shipper VARCHAR (100),
@@ -437,6 +438,7 @@ CONSTRAINT PK_SaleS PRIMARY KEY (ID),
 CONSTRAINT FK_Sales_Customer FOREIGN KEY (IdCustomer) REFERENCES Customer (ID),
 CONSTRAINT FK_Sales_Status FOREIGN KEY (IdStatus) REFERENCES [Status] (ID),
 CONSTRAINT FK_Sales_Product FOREIGN KEY (IdProduct) REFERENCES ProductMaster (ID),
+CONSTRAINT FK_Sales_ProductSpecifications FOREIGN KEY (IdProductSpecifications) REFERENCES ProductSpecifications(ID),
 CONSTRAINT FK_Sales_Currency FOREIGN KEY (IdCurrency) REFERENCES Currency (ID),
 CONSTRAINT FK_Sales_IncoTerm FOREIGN KEY (IdIncoTerm) REFERENCES Incoterm (ID),
 CONSTRAINT FK_Sales_MOP FOREIGN KEY (IdMethodOfPayment) REFERENCES MethodOfPayment (ID),
@@ -444,6 +446,7 @@ CONSTRAINT FK_Sales_POL FOREIGN KEY (IdPortOfLoading) REFERENCES [Ports] (ID),
 CONSTRAINT FK_Sales_POD FOREIGN KEY (IdPortOfDestination) REFERENCES [Ports] (ID)
 );
 GO
+
 
 
 CREATE TABLE ShipmentStatus(
@@ -468,10 +471,10 @@ INSERT INTO ShipmentStatus ([Name]) VALUES
 GO
 
 CREATE TABLE ContainerType (
-    ID INT IDENTITY(1,1) NOT NULL,
-    Code VARCHAR(10) NOT NULL, 
-    [Description] VARCHAR(100) NOT NULL, 
-    CONSTRAINT PK_ContainerType PRIMARY KEY (ID)
+ID INT IDENTITY(1,1) NOT NULL,
+Code VARCHAR(10) NOT NULL, 
+[Description] VARCHAR(100) NOT NULL, 
+CONSTRAINT PK_ContainerType PRIMARY KEY (ID)
 );
 GO
 

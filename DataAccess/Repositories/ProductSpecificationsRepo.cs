@@ -62,5 +62,21 @@ namespace DataAccess.Repositories
                 }
             }
         }
+        public ProductSpecifications GetById(int id)
+        {
+            string query = "SELECT ID, IdProductMaster, [Size], Moisture, SplitAndBroken, Foreignmatter, TotalDamage, Purity, AddSpecs FROM ProductSpecifications WHERE ID = @ID";
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    var result = conn.QuerySingleOrDefault<ProductSpecifications>(query, new { ID = id });
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error while trying to retrieve ProductSpecification by ID. " + ex.Message);
+                }
+            }
+        }
     }
 }

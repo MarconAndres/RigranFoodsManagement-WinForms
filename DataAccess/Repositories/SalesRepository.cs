@@ -13,7 +13,7 @@ namespace DataAccess.Repositories
 
         public List<Sales> GetAll()
         {
-            string query = "SELECT ID, IdCustomer, IdProduct, IdStatus, ContractDate, Shipper, Seller, CropYear, Quantity, PricePerTon, IdCurrency, IdIncoTerm, IdMethodOfPayment, IdPortOfLoading, IdPortOfDestination, BrokerComissionPc FROM Sales";
+            string query = "SELECT ID, IdCustomer, IdProduct, IdProductSpecifications, IdStatus, ContractDate, Shipper, Seller, CropYear, Quantity, PricePerTon, IdCurrency, IdIncoTerm, IdMethodOfPayment, IdPortOfLoading, IdPortOfDestination, BrokerComissionPc FROM Sales";
 
             using (SqlConnection conn = _connection.GetConnection())
             {
@@ -32,7 +32,7 @@ namespace DataAccess.Repositories
 
         public void Insert (Sales sales)
         {
-            string query = "INSERT INTO Sales (IdCustomer, IdProduct, IdStatus, ContractDate, Shipper, Seller, CropYear, Quantity, PricePerTon, IdCurrency, IdIncoTerm,IdMethodOfPayment, IdPortOfLoading, IdPortOfDestination, BrokerComissionPc) VALUES (@IdCustomer, @IdProduct, @IdStatus, @ContractDate, @Shipper, @Seller, @CropYear, @Quantity, @PricePerTon, @IdCurrency, @IdIncoTerm, @IdMethodOfPayment, @IdPortOfLoading, @IdPortOfDestination, @BrokerComissionPc)";
+            string query = "INSERT INTO Sales (IdCustomer, IdProduct, IdProductSpecifications,IdStatus, ContractDate, Shipper, Seller, CropYear, Quantity, PricePerTon, IdCurrency, IdIncoTerm,IdMethodOfPayment, IdPortOfLoading, IdPortOfDestination, BrokerComissionPc) VALUES (@IdCustomer, @IdProduct, @ @IdStatus, @ContractDate, @Shipper, @Seller, @CropYear, @Quantity, @PricePerTon, @IdCurrency, @IdIncoTerm, @IdMethodOfPayment, @IdPortOfLoading, @IdPortOfDestination, @BrokerComissionPc)";
 
             using (SqlConnection conn = _connection.GetConnection())
             {
@@ -49,7 +49,7 @@ namespace DataAccess.Repositories
         }
         public void Update (Sales sales)
         {
-            string query = "UPDATE Sales SET IdCustomer = @IdCustomer, IdProduct = @IdProduct, IdStatus = @IdStatus, ContractDate = @ContractDate, Shipper = @Shipper, Seller = @Seller, CropYear = @CropYear, Quantity = @Quantity, PricePerTon = @PricePerTon, IdCurrency = @IdCurrency, IdIncoTerm = @IdIncoTerm, IdMethodOfPayment = @IdMethodOfPayment, IdPortOfLoading = @IdPortOfLoading, IdPortOfDestination = @IdPortOfDestination, BrokerComissionPc = @BrokerComissionPc WHERE ID = @ID";
+            string query = "UPDATE Sales SET IdCustomer = @IdCustomer, IdProduct = @IdProduct, IdProductSpecifications = @IdProductSpecifications, IdStatus = @IdStatus, ContractDate = @ContractDate, Shipper = @Shipper, Seller = @Seller, CropYear = @CropYear, Quantity = @Quantity, PricePerTon = @PricePerTon, IdCurrency = @IdCurrency, IdIncoTerm = @IdIncoTerm, IdMethodOfPayment = @IdMethodOfPayment, IdPortOfLoading = @IdPortOfLoading, IdPortOfDestination = @IdPortOfDestination, BrokerComissionPc = @BrokerComissionPc WHERE ID = @ID";
 
             using (SqlConnection conn = _connection.GetConnection())
             {
@@ -66,7 +66,7 @@ namespace DataAccess.Repositories
         }
         public Sales GetById(int id)
         {
-            string query = "SELECT ID, IdCustomer, IdProduct, IdStatus, ContractDate, Shipper, Seller, CropYear, Quantity, PricePerTon, IdCurrency, IdIncoTerm, IdMethodOfPayment, IdPortOfLoading, IdPortOfDestination, BrokerComissionPc FROM Sales WHERE ID = @ID";
+            string query = "SELECT ID, IdCustomer, IdProduct, IdProductSpecifications, IdStatus, ContractDate, Shipper, Seller, CropYear, Quantity, PricePerTon, IdCurrency, IdIncoTerm, IdMethodOfPayment, IdPortOfLoading, IdPortOfDestination, BrokerComissionPc FROM Sales WHERE ID = @ID";
             using (SqlConnection conn = _connection.GetConnection())
             {
                 try

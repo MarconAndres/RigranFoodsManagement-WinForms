@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             panelLeft = new Panel();
+            btnProductSpecifications = new Button();
+            btnProductMaster = new Button();
+            btnProductType = new Button();
+            label1 = new Label();
             btnCPP = new Button();
             btnCustomerContact = new Button();
             buttonCustomer = new Button();
@@ -46,6 +50,10 @@
             // 
             panelLeft.BackColor = SystemColors.ControlDark;
             panelLeft.BorderStyle = BorderStyle.FixedSingle;
+            panelLeft.Controls.Add(btnProductSpecifications);
+            panelLeft.Controls.Add(btnProductMaster);
+            panelLeft.Controls.Add(btnProductType);
+            panelLeft.Controls.Add(label1);
             panelLeft.Controls.Add(btnCPP);
             panelLeft.Controls.Add(btnCustomerContact);
             panelLeft.Controls.Add(buttonCustomer);
@@ -61,6 +69,61 @@
             panelLeft.Name = "panelLeft";
             panelLeft.Size = new Size(196, 510);
             panelLeft.TabIndex = 0;
+            // 
+            // btnProductSpecifications
+            // 
+            btnProductSpecifications.BackColor = SystemColors.ControlLight;
+            btnProductSpecifications.Dock = DockStyle.Top;
+            btnProductSpecifications.FlatAppearance.MouseOverBackColor = Color.White;
+            btnProductSpecifications.Font = new Font("Segoe UI", 12F);
+            btnProductSpecifications.Location = new Point(0, 375);
+            btnProductSpecifications.Margin = new Padding(4, 3, 4, 3);
+            btnProductSpecifications.Name = "btnProductSpecifications";
+            btnProductSpecifications.Size = new Size(194, 39);
+            btnProductSpecifications.TabIndex = 11;
+            btnProductSpecifications.Text = "Product Specifications";
+            btnProductSpecifications.UseVisualStyleBackColor = false;
+            btnProductSpecifications.Click += btnProductSpecifications_Click;
+            // 
+            // btnProductMaster
+            // 
+            btnProductMaster.BackColor = SystemColors.ControlLight;
+            btnProductMaster.Dock = DockStyle.Top;
+            btnProductMaster.FlatAppearance.MouseOverBackColor = Color.White;
+            btnProductMaster.Font = new Font("Segoe UI", 12F);
+            btnProductMaster.Location = new Point(0, 336);
+            btnProductMaster.Margin = new Padding(4, 3, 4, 3);
+            btnProductMaster.Name = "btnProductMaster";
+            btnProductMaster.Size = new Size(194, 39);
+            btnProductMaster.TabIndex = 10;
+            btnProductMaster.Text = "Product Master";
+            btnProductMaster.UseVisualStyleBackColor = false;
+            // 
+            // btnProductType
+            // 
+            btnProductType.BackColor = SystemColors.ControlLight;
+            btnProductType.Dock = DockStyle.Top;
+            btnProductType.FlatAppearance.MouseOverBackColor = Color.White;
+            btnProductType.Font = new Font("Segoe UI", 12F);
+            btnProductType.Location = new Point(0, 297);
+            btnProductType.Margin = new Padding(4, 3, 4, 3);
+            btnProductType.Name = "btnProductType";
+            btnProductType.Size = new Size(194, 39);
+            btnProductType.TabIndex = 9;
+            btnProductType.Text = "Product Type";
+            btnProductType.UseVisualStyleBackColor = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Dock = DockStyle.Top;
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(0, 276);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(74, 21);
+            label1.TabIndex = 8;
+            label1.Text = "Products:";
             // 
             // btnCPP
             // 
@@ -230,5 +293,9 @@
         private Button buttonCustomer;
         private Button btnCustomerContact;
         private Button btnCPP;
+        private Button btnProductMaster;
+        private Button btnProductType;
+        private Label label1;
+        private Button btnProductSpecifications;
     }
 }
