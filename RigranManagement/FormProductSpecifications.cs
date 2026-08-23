@@ -22,7 +22,7 @@ namespace Winforms
             _productSpecificationsService = new ProductSpecificationsService();
             _allProductSpecifications = new List<dynamic>();
         }
-        
+
         private void FormProductSpecifications_Load_1(object sender, EventArgs e)
         {
             RefreshDgv();
@@ -123,5 +123,33 @@ namespace Winforms
             }
         }
 
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (_allProductSpecifications == null)
+            {
+                return;
+            }
+            string filteredText = txtSearch.Text.Trim().ToLower();
+            if (string.IsNullOrWhiteSpace(filteredText))
+            {
+                dgvProductSpecifications.DataSource = _allProductSpecifications;
+            }
+            else
+            {
+                var filteredList = _allProductSpecifications.Where(x =>
+                    (x.Product != null && x.Product.ToLower().Contains(filteredText)) ||
+                    (x.Size != null && x.Size.ToLower().Contains(filteredText)) ||
+                    (x.Moisture != null && x.Moisture.ToLower().Contains(filteredText)) ||
+                    (x.SplitAndBroken != null && x.SplitAndBroken.ToLower().Contains(filteredText)) ||
+                    (x.ForeignMatter != null && x.ForeignMatter.ToLower().Contains(filteredText)) ||
+                    (x.TotalDamage != null && x.TotalDamage.ToLower().Contains(filteredText)) ||
+                    (x.Purity != null && x.Purity.ToLower().Contains(filteredText)) ||
+                    (x.AdditionalSpecs != null && x.AdditionalSpecs.ToLower().Contains(filteredText))
+                ).ToList();
+
+                dgvProductSpecifications.DataSource = null;
+                dgvProductSpecifications.DataSource = filteredList;
+            }
+        }
     }
 }

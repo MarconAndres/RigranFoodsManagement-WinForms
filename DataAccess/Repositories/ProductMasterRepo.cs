@@ -64,5 +64,22 @@ namespace DataAccess.Repositories
                 }
             }
         }
+
+        public ProductMaster GetById(int id)
+        {
+            string query = "SELECT ID, IdProductType, [Name] FROM ProductMaster WHERE ID = @ID";
+            using (SqlConnection conn = _connection.GetConnection())
+            {
+                try
+                {
+                    var result = conn.QuerySingleOrDefault<ProductMaster>(query, new { ID = id });
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error while trying to read ProductMaster by ID. " + ex.Message);
+                }
+            }
+        }
     }
 }

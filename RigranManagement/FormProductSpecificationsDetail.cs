@@ -70,5 +70,52 @@ namespace Winforms
                 MessageBox.Show($"Error loading form: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnPSDSave_Click(object sender, EventArgs e)
+        {
+            if (cmbProduct.SelectedIndex == -1 || cmbProduct.SelectedValue == null)
+            {
+                _currentProductSpecifications.IdProductMaster = null;
+            }
+            else
+            {
+                _currentProductSpecifications.IdProductMaster = (int)cmbProduct.SelectedValue;
+            }
+            _currentProductSpecifications.Size = txtSize.Text.Trim();
+            _currentProductSpecifications.Moisture = txtMoisture.Text.Trim();
+            _currentProductSpecifications.SplitAndBroken = txtSplitAndBroken.Text.Trim();
+            _currentProductSpecifications.Foreignmatter = txtForeignMatter.Text.Trim();
+            _currentProductSpecifications.TotalDamage = txtTotalDamage.Text.Trim();
+            _currentProductSpecifications.Purity = txtPurity.Text.Trim();
+            _currentProductSpecifications.AddSpecs = txtAddSpecs.Text.Trim();
+
+            try
+            {
+                if (_isEditMode)
+                {
+                    _productSpecificationsService.Update(_currentProductSpecifications);
+                    MessageBox.Show("Product Specifications updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    _productSpecificationsService.Insert(_currentProductSpecifications);
+                    MessageBox.Show("Product Specifications added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving product specifications: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
+        }
+
+        private void btnPSDCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
     }
 }

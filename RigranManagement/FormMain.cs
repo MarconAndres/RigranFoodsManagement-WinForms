@@ -69,5 +69,10 @@ namespace Winform
         {
             OpenFormInPanelContainer(new FormProductSpecifications());
         }
+
+        private void btnProductMaster_Click(object sender, EventArgs e)
+        {
+            OpenFormInPanelContainer(new FormProductMaster());
+        }
     }
 }

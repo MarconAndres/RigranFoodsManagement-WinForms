@@ -55,4 +55,13 @@ namespace Business
                 throw new Exception("Error: The field Name can not possess more than 100 charaters.");
             }
         }
-}   }
+        public ProductMaster GetById(int id)
+        {
+            if (id <= 0)
+            {
+                throw new Exception("Error: The Product Master ID provided is not valid.");
+            }
+            return _productMasterRepo.GetById(id);
+        }
+    }   
+}

@@ -51,6 +51,7 @@
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(194, 23);
             txtSearch.TabIndex = 8;
+            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // label1
             // 

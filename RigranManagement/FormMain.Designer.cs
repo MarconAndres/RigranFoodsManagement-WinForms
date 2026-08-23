@@ -98,6 +98,7 @@
             btnProductMaster.TabIndex = 10;
             btnProductMaster.Text = "Product Master";
             btnProductMaster.UseVisualStyleBackColor = false;
+            btnProductMaster.Click += btnProductMaster_Click;
             // 
             // btnProductType
             // 

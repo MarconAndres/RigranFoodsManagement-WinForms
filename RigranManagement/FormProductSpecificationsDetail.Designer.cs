@@ -220,6 +220,7 @@
             btnPSDCancel.TabIndex = 48;
             btnPSDCancel.Text = "Cancel";
             btnPSDCancel.UseVisualStyleBackColor = true;
+            btnPSDCancel.Click += btnPSDCancel_Click;
             // 
             // btnPSDSave
             // 
@@ -231,6 +232,7 @@
             btnPSDSave.TabIndex = 47;
             btnPSDSave.Text = "Save";
             btnPSDSave.UseVisualStyleBackColor = true;
+            btnPSDSave.Click += btnPSDSave_Click;
             // 
             // label8
             // 
