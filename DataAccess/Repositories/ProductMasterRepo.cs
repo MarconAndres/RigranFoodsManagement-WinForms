@@ -49,13 +49,13 @@ namespace DataAccess.Repositories
         }
         public void Update (ProductMaster productMaster)
         {
-            string query = "UPDATE ProductMaster SET IdProductType = @IdProductType, [Name] = @Name";
+            string query = "UPDATE ProductMaster SET IdProductType = @IdProductType, [Name] = @Name WHERE ID = @ID";
 
             using (SqlConnection conn = _connection.GetConnection())
             {
                 try
                 {
-                    conn.Query<ProductMaster>(query);
+                    conn.Execute(query, productMaster);
                 }
                 catch (Exception ex)
                 {
