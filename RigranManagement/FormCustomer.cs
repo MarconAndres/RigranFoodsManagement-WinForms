@@ -21,7 +21,7 @@ namespace Winform
         {
             InitializeComponent();
             _customerService = new CustomerService();
-            _allCustomers = new List<dynamic>(); 
+            _allCustomers = new List<dynamic>();
         }
 
         private void FormCustomer_Load(object sender, EventArgs e)
@@ -35,17 +35,30 @@ namespace Winform
             try
             {
                 List<Customer> customerList = _customerService.GetAll();
-                
+
                 SectorBusinessService sectorBusinessService = new SectorBusinessService();
                 List<BusinessSector> businessSectors = sectorBusinessService.GetAll();
                 CountryService countryService = new CountryService();
                 List<Country> countries = countryService.GetAll();
+
+                SalesService salesService = new SalesService();
+                List<Sales> salesList = salesService.GetAll();
+
+                var lastPurchases = salesList
+                    .GroupBy(s => s.IdCustomer)
+                    .Select(g => new
+                    {
+                        IdCustomer = g.Key,
+                        LastPurchaseDate = g.Max(s => (DateTime?)s.ContractDate)
+                    }).ToList();
 
                 var customerListwithCountryandSector = from customer in customerList
                                                        join sector in businessSectors on customer.IdBusinessSector equals sector.ID into sectorGroup
                                                        from sector in sectorGroup.DefaultIfEmpty()
                                                        join country in countries on customer.IdCountry equals country.ID into countryGroup
                                                        from country in countryGroup.DefaultIfEmpty()
+                                                       join lastPurchase in lastPurchases on customer.ID equals lastPurchase.IdCustomer into lastPurchaseGroup
+                                                       from lastPurchase in lastPurchaseGroup.DefaultIfEmpty()
                                                        select new
                                                        {
                                                            customer.ID,
@@ -59,7 +72,8 @@ namespace Winform
                                                            customer.PhoneNumber,
                                                            customer.BIO,
                                                            customer.EORI,
-                                                           Active = customer.Active ? "Yes" : "No"
+                                                           Active = customer.Active ? "Yes" : "No",
+                                                           LastPurchaseDate = lastPurchase?.LastPurchaseDate
                                                        };
 
                 dgvCustomer.DataSource = null;
@@ -84,6 +98,10 @@ namespace Winform
             dgvCustomer.Columns["BusinessSector"].HeaderText = "Business Sector";
             dgvCustomer.Columns["RegisteredName"].HeaderText = "Registered Name";
             dgvCustomer.Columns["PhoneNumber"].HeaderText = "Phone Number";
+            if (dgvCustomer.Columns["LastPurchaseDate"] != null)
+            {
+                dgvCustomer.Columns["LastPurchaseDate"].Visible = false;
+            }
             dgvCustomer.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCustomer.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCustomer.MultiSelect = false;
@@ -160,6 +178,58 @@ namespace Winform
                 dgvCustomer.DataSource = null;
                 dgvCustomer.DataSource = filteredList;
             }
+        }
+
+        private void btnHotFilter_Click(object sender, EventArgs e)
+        {
+            if (_allCustomers == null) return;
+
+            DateTime twoMonthsAgo = DateTime.Now.AddMonths(-2);
+
+            var filteredList = _allCustomers.Where(c =>
+                c.LastPurchaseDate != null && c.LastPurchaseDate >= twoMonthsAgo
+            ).ToList();
+            dgvCustomer.DataSource = null;
+            dgvCustomer.DataSource = filteredList;
+        }
+
+        private void btnWarmFilter_Click(object sender, EventArgs e)
+        {
+            if (_allCustomers == null) return;
+
+            DateTime twoMonthsAgo = DateTime.Now.AddMonths(-2);
+            DateTime fourMonthsAgo = DateTime.Now.AddMonths(-4);
+
+            var filteredList = _allCustomers.Where(c =>
+                c.LastPurchaseDate != null && c.LastPurchaseDate < twoMonthsAgo && c.LastPurchaseDate >= fourMonthsAgo
+            ).ToList();
+            dgvCustomer.DataSource = null;
+            dgvCustomer.DataSource = filteredList;
+        }
+
+        private void btnColdFilter_Click(object sender, EventArgs e)
+        {
+            if (_allCustomers == null) return;
+
+            DateTime fourMonthsAgo = DateTime.Now.AddMonths(-4);
+            DateTime sixMonthsAgo = DateTime.Now.AddMonths(-6);
+
+            var filteredList = _allCustomers.Where(c =>
+                c.LastPurchaseDate != null && c.LastPurchaseDate < fourMonthsAgo && c.LastPurchaseDate >= sixMonthsAgo
+            ).ToList();
+            dgvCustomer.DataSource = null;
+            dgvCustomer.DataSource = filteredList;
+        }
+
+        private void btnIcedFilter_Click(object sender, EventArgs e)
+        {
+            if (_allCustomers == null) return;
+
+            var filteredList = _allCustomers.Where(c =>
+                c.LastPurchaseDate == null || c.LastPurchaseDate < DateTime.Now.AddMonths(-6)
+            ).ToList();
+            dgvCustomer.DataSource = null;
+            dgvCustomer.DataSource = filteredList;
         }
     }
 }
